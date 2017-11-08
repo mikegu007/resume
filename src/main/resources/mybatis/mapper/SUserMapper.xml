@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mike.resume.mapper.SUserMapper">
+  <resultMap id="BaseResultMap" type="com.mike.resume.entity.SUser">
+    <id column="code" jdbcType="VARCHAR" property="code" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="BIGINT" property="phone" />
+    <result column="weibo_code" jdbcType="VARCHAR" property="weiboCode" />
+    <result column="wechat_code" jdbcType="VARCHAR" property="wechatCode" />
+    <result column="qq_code" jdbcType="VARCHAR" property="qqCode" />
+    <result column="safe_number" jdbcType="INTEGER" property="safeNumber" />
+    <result column="is_bind_secur" jdbcType="BIT" property="isBindSecur" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="login_count" jdbcType="INTEGER" property="loginCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="enable" jdbcType="BIT" property="enable" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="source" jdbcType="TINYINT" property="source" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+    <result column="locked" jdbcType="BIT" property="locked" />
+    <result column="del_flag" jdbcType="BIT" property="delFlag" />
+    <result column="corp_id" jdbcType="INTEGER" property="corpId" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    code, email, phone, weibo_code, wechat_code, qq_code, safe_number, is_bind_secur, 
+    password, login_count, create_time, last_login_time, enable, last_login_ip, source, 
+    salt, locked, del_flag, corp_id, dept_id
+  </sql>
+  <sql id="condition">
+    <where>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null">
+        and email = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="phone != null">
+        and phone = #{phone,jdbcType=BIGINT}
+      </if>
+      <if test="weiboCode != null">
+        and weibo_code = #{weiboCode,jdbcType=VARCHAR}
+      </if>
+      <if test="wechatCode != null">
+        and wechat_code = #{wechatCode,jdbcType=VARCHAR}
+      </if>
+      <if test="qqCode != null">
+        and qq_code = #{qqCode,jdbcType=VARCHAR}
+      </if>
+      <if test="safeNumber != null">
+        and safe_number = #{safeNumber,jdbcType=INTEGER}
+      </if>
+      <if test="isBindSecur != null">
+        and is_bind_secur = #{isBindSecur,jdbcType=BIT}
+      </if>
+      <if test="password != null">
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="loginCount != null">
+        and login_count = #{loginCount,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="lastLoginTime != null">
+        and last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="enable != null">
+        and enable = #{enable,jdbcType=BIT}
+      </if>
+      <if test="lastLoginIp != null">
+        and last_login_ip = #{lastLoginIp,jdbcType=VARCHAR}
+      </if>
+      <if test="source != null">
+        and source = #{source,jdbcType=TINYINT}
+      </if>
+      <if test="salt != null">
+        and salt = #{salt,jdbcType=VARCHAR}
+      </if>
+      <if test="locked != null">
+        and locked = #{locked,jdbcType=BIT}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=BIT}
+      </if>
+      <if test="corpId != null">
+        and corp_id = #{corpId,jdbcType=INTEGER}
+      </if>
+      <if test="deptId != null">
+        and dept_id = #{deptId,jdbcType=INTEGER}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from s_user
+    where code = #{code,jdbcType=VARCHAR}
+  </select>
+  <select id="selectSelective" parameterType="com.mike.resume.entity.SUser" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from s_user
+    <include refid="condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from s_user
+    where code = #{code,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.mike.resume.entity.SUser">
+    insert into s_user (code, email, phone, 
+      weibo_code, wechat_code, qq_code, 
+      safe_number, is_bind_secur, password, 
+      login_count, create_time, last_login_time, 
+      enable, last_login_ip, source, 
+      salt, locked, del_flag, corp_id, 
+      dept_id)
+    values (#{code,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, 
+      #{weiboCode,jdbcType=VARCHAR}, #{wechatCode,jdbcType=VARCHAR}, #{qqCode,jdbcType=VARCHAR}, 
+      #{safeNumber,jdbcType=INTEGER}, #{isBindSecur,jdbcType=BIT}, #{password,jdbcType=VARCHAR}, 
+      #{loginCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, 
+      #{enable,jdbcType=BIT}, #{lastLoginIp,jdbcType=VARCHAR}, #{source,jdbcType=TINYINT}, 
+      #{salt,jdbcType=VARCHAR}, #{locked,jdbcType=BIT}, #{delFlag,jdbcType=BIT}, #{corpId,jdbcType=INTEGER}, 
+      #{deptId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mike.resume.entity.SUser">
+    insert into s_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        code,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="weiboCode != null">
+        weibo_code,
+      </if>
+      <if test="wechatCode != null">
+        wechat_code,
+      </if>
+      <if test="qqCode != null">
+        qq_code,
+      </if>
+      <if test="safeNumber != null">
+        safe_number,
+      </if>
+      <if test="isBindSecur != null">
+        is_bind_secur,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="loginCount != null">
+        login_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="enable != null">
+        enable,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="source != null">
+        source,
+      </if>
+      <if test="salt != null">
+        salt,
+      </if>
+      <if test="locked != null">
+        locked,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="corpId != null">
+        corp_id,
+      </if>
+      <if test="deptId != null">
+        dept_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=BIGINT},
+      </if>
+      <if test="weiboCode != null">
+        #{weiboCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatCode != null">
+        #{wechatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="qqCode != null">
+        #{qqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="safeNumber != null">
+        #{safeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isBindSecur != null">
+        #{isBindSecur,jdbcType=BIT},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginCount != null">
+        #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=BIT},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=TINYINT},
+      </if>
+      <if test="salt != null">
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        #{locked,jdbcType=BIT},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=BIT},
+      </if>
+      <if test="corpId != null">
+        #{corpId,jdbcType=INTEGER},
+      </if>
+      <if test="deptId != null">
+        #{deptId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mike.resume.entity.SUser">
+    update s_user
+    <set>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=BIGINT},
+      </if>
+      <if test="weiboCode != null">
+        weibo_code = #{weiboCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatCode != null">
+        wechat_code = #{wechatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="qqCode != null">
+        qq_code = #{qqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="safeNumber != null">
+        safe_number = #{safeNumber,jdbcType=INTEGER},
+      </if>
+      <if test="isBindSecur != null">
+        is_bind_secur = #{isBindSecur,jdbcType=BIT},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="loginCount != null">
+        login_count = #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null">
+        enable = #{enable,jdbcType=BIT},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=TINYINT},
+      </if>
+      <if test="salt != null">
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="locked != null">
+        locked = #{locked,jdbcType=BIT},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=BIT},
+      </if>
+      <if test="corpId != null">
+        corp_id = #{corpId,jdbcType=INTEGER},
+      </if>
+      <if test="deptId != null">
+        dept_id = #{deptId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where code = #{code,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.SUser">
+    update s_user
+    set email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=BIGINT},
+      weibo_code = #{weiboCode,jdbcType=VARCHAR},
+      wechat_code = #{wechatCode,jdbcType=VARCHAR},
+      qq_code = #{qqCode,jdbcType=VARCHAR},
+      safe_number = #{safeNumber,jdbcType=INTEGER},
+      is_bind_secur = #{isBindSecur,jdbcType=BIT},
+      password = #{password,jdbcType=VARCHAR},
+      login_count = #{loginCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      enable = #{enable,jdbcType=BIT},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      source = #{source,jdbcType=TINYINT},
+      salt = #{salt,jdbcType=VARCHAR},
+      locked = #{locked,jdbcType=BIT},
+      del_flag = #{delFlag,jdbcType=BIT},
+      corp_id = #{corpId,jdbcType=INTEGER},
+      dept_id = #{deptId,jdbcType=INTEGER}
+    where code = #{code,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="findByCode" resultMap="BaseResultMap">
+    select * from s_user where code=#{code,jdbcType=VARCHAR}
+    and del_flag = 0
+  </select>
+  <select id="findByEmail" resultMap="BaseResultMap">
+    select * from s_user where email=#{email,jdbcType=VARCHAR}
+    and del_flag = 0
+  </select>
+  <select id="findByPhone" resultMap="BaseResultMap">
+    select * from s_user where phone=#{phone,jdbcType=BIGINT}
+    and del_flag = 0
+  </select>
+</mapper>

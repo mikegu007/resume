@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mike.resume.mapper.LotteryMapper">
+    <resultMap id="BaseResultMap" type="com.mike.resume.entity.Lottery">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="period" jdbcType="VARCHAR" property="period"/>
+        <result column="date" jdbcType="TIMESTAMP" property="date"/>
+        <result column="red_one" jdbcType="INTEGER" property="redOne"/>
+        <result column="red_two" jdbcType="INTEGER" property="redTwo"/>
+        <result column="red_three" jdbcType="INTEGER" property="redThree"/>
+        <result column="red_four" jdbcType="INTEGER" property="redFour"/>
+        <result column="red_five" jdbcType="INTEGER" property="redFive"/>
+        <result column="red_six" jdbcType="INTEGER" property="redSix"/>
+        <result column="blue_one" jdbcType="INTEGER" property="blueOne"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, period, date, red_one, red_two, red_three, red_four, red_five, red_six, blue_one
+  </sql>
+    <sql id="condition">
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="period != null">
+                and period = #{period,jdbcType=VARCHAR}
+            </if>
+            <if test="date != null">
+                and date = #{date,jdbcType=TIMESTAMP}
+            </if>
+            <if test="redOne != null">
+                and red_one = #{redOne,jdbcType=INTEGER}
+            </if>
+            <if test="redTwo != null">
+                and red_two = #{redTwo,jdbcType=INTEGER}
+            </if>
+            <if test="redThree != null">
+                and red_three = #{redThree,jdbcType=INTEGER}
+            </if>
+            <if test="redFour != null">
+                and red_four = #{redFour,jdbcType=INTEGER}
+            </if>
+            <if test="redFive != null">
+                and red_five = #{redFive,jdbcType=INTEGER}
+            </if>
+            <if test="redSix != null">
+                and red_six = #{redSix,jdbcType=INTEGER}
+            </if>
+            <if test="blueOne != null">
+                and blue_one = #{blueOne,jdbcType=INTEGER}
+            </if>
+
+        </where>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from lottery
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectSelective" parameterType="com.mike.resume.entity.Lottery" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from lottery
+        <include refid="condition" />
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from lottery
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.mike.resume.entity.Lottery">
+    insert into lottery (id, period, date, 
+      red_one, red_two, red_three, 
+      red_four, red_five, red_six, 
+      blue_one)
+    values (#{id,jdbcType=INTEGER}, #{period,jdbcType=VARCHAR}, #{date,jdbcType=TIMESTAMP}, 
+      #{redOne,jdbcType=INTEGER}, #{redTwo,jdbcType=INTEGER}, #{redThree,jdbcType=INTEGER}, 
+      #{redFour,jdbcType=INTEGER}, #{redFive,jdbcType=INTEGER}, #{redSix,jdbcType=INTEGER}, 
+      #{blueOne,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.mike.resume.entity.Lottery">
+        insert into lottery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="period != null">
+                period,
+            </if>
+            <if test="date != null">
+                date,
+            </if>
+            <if test="redOne != null">
+                red_one,
+            </if>
+            <if test="redTwo != null">
+                red_two,
+            </if>
+            <if test="redThree != null">
+                red_three,
+            </if>
+            <if test="redFour != null">
+                red_four,
+            </if>
+            <if test="redFive != null">
+                red_five,
+            </if>
+            <if test="redSix != null">
+                red_six,
+            </if>
+            <if test="blueOne != null">
+                blue_one,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="period != null">
+                #{period,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null">
+                #{date,jdbcType=TIMESTAMP},
+            </if>
+            <if test="redOne != null">
+                #{redOne,jdbcType=INTEGER},
+            </if>
+            <if test="redTwo != null">
+                #{redTwo,jdbcType=INTEGER},
+            </if>
+            <if test="redThree != null">
+                #{redThree,jdbcType=INTEGER},
+            </if>
+            <if test="redFour != null">
+                #{redFour,jdbcType=INTEGER},
+            </if>
+            <if test="redFive != null">
+                #{redFive,jdbcType=INTEGER},
+            </if>
+            <if test="redSix != null">
+                #{redSix,jdbcType=INTEGER},
+            </if>
+            <if test="blueOne != null">
+                #{blueOne,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mike.resume.entity.Lottery">
+        update lottery
+        <set>
+            <if test="period != null">
+                period = #{period,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null">
+                date = #{date,jdbcType=TIMESTAMP},
+            </if>
+            <if test="redOne != null">
+                red_one = #{redOne,jdbcType=INTEGER},
+            </if>
+            <if test="redTwo != null">
+                red_two = #{redTwo,jdbcType=INTEGER},
+            </if>
+            <if test="redThree != null">
+                red_three = #{redThree,jdbcType=INTEGER},
+            </if>
+            <if test="redFour != null">
+                red_four = #{redFour,jdbcType=INTEGER},
+            </if>
+            <if test="redFive != null">
+                red_five = #{redFive,jdbcType=INTEGER},
+            </if>
+            <if test="redSix != null">
+                red_six = #{redSix,jdbcType=INTEGER},
+            </if>
+            <if test="blueOne != null">
+                blue_one = #{blueOne,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.Lottery">
+    update lottery
+    set period = #{period,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP},
+      red_one = #{redOne,jdbcType=INTEGER},
+      red_two = #{redTwo,jdbcType=INTEGER},
+      red_three = #{redThree,jdbcType=INTEGER},
+      red_four = #{redFour,jdbcType=INTEGER},
+      red_five = #{redFive,jdbcType=INTEGER},
+      red_six = #{redSix,jdbcType=INTEGER},
+      blue_one = #{blueOne,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
