@@ -1,126 +1,93 @@
 package com.mike.resume.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class SUser {
-    private String code;
+public class SUser implements Serializable {
+    private Integer openId;
 
-    private String email;
+    private String avatarUrl;
 
-    private Long phone;
+    private String city;
 
-    private String weiboCode;
+    private String country;
 
-    private String wechatCode;
+    private String province;
 
-    private String qqCode;
+    private String language;
 
-    private Integer safeNumber;
+    private String nickName;
 
-    private Boolean isBindSecur;
-
-    private String password;
-
-    private Integer loginCount;
+    private Integer gender;
 
     private Date createTime;
 
-    private Date lastLoginTime;
-
     private Boolean enable;
-
-    private String lastLoginIp;
-
-    private Byte source;
-
-    private String salt;
-
-    private Boolean locked;
 
     private Boolean delFlag;
 
-    private Integer corpId;
-
-    private Integer deptId;
-
-    public String getCode() {
-        return code;
+    public Integer getOpenId() {
+        return openId;
     }
 
-    public void setCode(String code) {
-        this.code = code == null ? null : code.trim();
+    public void setOpenId(Integer openId) {
+        this.openId = openId;
     }
 
-    public String getEmail() {
-        return email;
+    public String getAvatarUrl() {
+        return avatarUrl;
     }
 
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl == null ? null : avatarUrl.trim();
     }
 
-    public Long getPhone() {
-        return phone;
+    public String getCity() {
+        return city;
     }
 
-    public void setPhone(Long phone) {
-        this.phone = phone;
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
-    public String getWeiboCode() {
-        return weiboCode;
+    public String getCountry() {
+        return country;
     }
 
-    public void setWeiboCode(String weiboCode) {
-        this.weiboCode = weiboCode == null ? null : weiboCode.trim();
+    public void setCountry(String country) {
+        this.country = country == null ? null : country.trim();
     }
 
-    public String getWechatCode() {
-        return wechatCode;
+    public String getProvince() {
+        return province;
     }
 
-    public void setWechatCode(String wechatCode) {
-        this.wechatCode = wechatCode == null ? null : wechatCode.trim();
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
     }
 
-    public String getQqCode() {
-        return qqCode;
+    public String getLanguage() {
+        return language;
     }
 
-    public void setQqCode(String qqCode) {
-        this.qqCode = qqCode == null ? null : qqCode.trim();
+    public void setLanguage(String language) {
+        this.language = language == null ? null : language.trim();
     }
 
-    public Integer getSafeNumber() {
-        return safeNumber;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setSafeNumber(Integer safeNumber) {
-        this.safeNumber = safeNumber;
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
-    public Boolean getIsBindSecur() {
-        return isBindSecur;
+    public Integer getGender() {
+        return gender;
     }
 
-    public void setIsBindSecur(Boolean isBindSecur) {
-        this.isBindSecur = isBindSecur;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
-    }
-
-    public Integer getLoginCount() {
-        return loginCount;
-    }
-
-    public void setLoginCount(Integer loginCount) {
-        this.loginCount = loginCount;
+    public void setGender(Integer gender) {
+        this.gender = gender;
     }
 
     public Date getCreateTime() {
@@ -131,14 +98,6 @@ public class SUser {
         this.createTime = createTime;
     }
 
-    public Date getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(Date lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
-
     public Boolean getEnable() {
         return enable;
     }
@@ -147,59 +106,11 @@ public class SUser {
         this.enable = enable;
     }
 
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp == null ? null : lastLoginIp.trim();
-    }
-
-    public Byte getSource() {
-        return source;
-    }
-
-    public void setSource(Byte source) {
-        this.source = source;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
-    }
-
-    public Boolean getLocked() {
-        return locked;
-    }
-
-    public void setLocked(Boolean locked) {
-        this.locked = locked;
-    }
-
     public Boolean getDelFlag() {
         return delFlag;
     }
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
-    }
-
-    public Integer getCorpId() {
-        return corpId;
-    }
-
-    public void setCorpId(Integer corpId) {
-        this.corpId = corpId;
-    }
-
-    public Integer getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(Integer deptId) {
-        this.deptId = deptId;
     }
 }
