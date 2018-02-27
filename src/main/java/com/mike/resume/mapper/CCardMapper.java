@@ -2,6 +2,8 @@ package com.mike.resume.mapper;
 
 import com.mike.resume.entity.CCard;
 
+import java.util.List;
+
 public interface CCardMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -10,6 +12,8 @@ public interface CCardMapper {
     int insertSelective(CCard record);
 
     CCard selectByPrimaryKey(Integer id);
+
+    List<CCard> selectSelective(CCard cCard);
 
     int updateByPrimaryKeySelective(CCard record);
 

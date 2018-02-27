@@ -2,6 +2,8 @@ package com.mike.resume.mapper;
 
 import com.mike.resume.entity.COrder;
 
+import java.util.List;
+
 public interface COrderMapper {
     int deleteByPrimaryKey(String orderNo);
 
@@ -10,6 +12,8 @@ public interface COrderMapper {
     int insertSelective(COrder record);
 
     COrder selectByPrimaryKey(String orderNo);
+
+    List<COrder> selectSelective(COrder cOrder);
 
     int updateByPrimaryKeySelective(COrder record);
 

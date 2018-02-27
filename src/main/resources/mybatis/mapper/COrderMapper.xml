@@ -18,6 +18,43 @@
     order_no, open_id, create_time, pay_time, amount_actual, amount, detail_count, status, 
     has_pay, remark, del_flag
   </sql>
+  <sql id="condition">
+    <where>
+      <if test="orderNo != null">
+        and order_no = #{orderNo,jdbcType=VARCHAR}
+      </if>
+      <if test="openId != null">
+        and open_id = #{openId,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="payTime != null">
+        and pay_time = #{payTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="amountActual != null">
+        and amount_actual = #{amountActual,jdbcType=DECIMAL}
+      </if>
+      <if test="amount != null">
+        and amount = #{amount,jdbcType=DECIMAL}
+      </if>
+      <if test="detailCount != null">
+        and detail_count = #{detailCount,jdbcType=INTEGER}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=TINYINT}
+      </if>
+      <if test="hasPay != null">
+        and has_pay = #{hasPay,jdbcType=BIT}
+      </if>
+      <if test="remark != null">
+        and remark = #{remark,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=BIT}
+      </if>
+    </where>
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

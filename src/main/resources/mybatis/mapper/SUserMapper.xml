@@ -18,11 +18,55 @@
     open_id, avatar_url, city, country, province, language, nick_name, gender, create_time, 
     enable, del_flag
   </sql>
+  <sql id="condition">
+    <where>
+      <if test="openId != null">
+        and open_id = #{openId,jdbcType=INTEGER}
+      </if>
+      <if test="avatarUrl != null">
+        and avatar_url = #{avatarUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="city != null">
+        and city = #{city,jdbcType=VARCHAR}
+      </if>
+      <if test="country != null">
+        and country = #{country,jdbcType=VARCHAR}
+      </if>
+      <if test="province != null">
+        and province = #{province,jdbcType=VARCHAR}
+      </if>
+      <if test="language != null">
+        and language = #{language,jdbcType=VARCHAR}
+      </if>
+      <if test="nickName != null">
+        and nick_name = #{nickName,jdbcType=VARCHAR}
+      </if>
+      <if test="gender != null">
+        and gender = #{gender,jdbcType=INTEGER}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="enable != null">
+        and enable = #{enable,jdbcType=BIT}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=BIT}
+      </if>
+    </where>
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from s_user
     where open_id = #{openId,jdbcType=INTEGER}
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from s_user
+    where 1=1
+    <include refid="condition" />
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from s_user

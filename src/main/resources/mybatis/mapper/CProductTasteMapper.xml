@@ -9,6 +9,19 @@
   <sql id="Base_Column_List">
     id, c_product_id, taste_name
   </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="cProductId != null">
+        and c_product_id = #{cProductId,jdbcType=INTEGER}
+      </if>
+      <if test="tasteName != null">
+        and taste_name = #{tasteName,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

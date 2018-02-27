@@ -2,6 +2,8 @@ package com.mike.resume.mapper;
 
 import com.mike.resume.entity.CProductTaste;
 
+import java.util.List;
+
 public interface CProductTasteMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -10,6 +12,8 @@ public interface CProductTasteMapper {
     int insertSelective(CProductTaste record);
 
     CProductTaste selectByPrimaryKey(Integer id);
+
+    List<CProductTaste> selectSelective(CProductTaste cProductTaste);
 
     int updateByPrimaryKeySelective(CProductTaste record);
 

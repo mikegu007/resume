@@ -2,6 +2,8 @@ package com.mike.resume.mapper;
 
 import com.mike.resume.entity.CProductSize;
 
+import java.util.List;
+
 public interface CProductSizeMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -10,6 +12,8 @@ public interface CProductSizeMapper {
     int insertSelective(CProductSize record);
 
     CProductSize selectByPrimaryKey(Integer id);
+
+    List<CProductSize> selectSelective(CProductSize cProductSize);
 
     int updateByPrimaryKeySelective(CProductSize record);
 

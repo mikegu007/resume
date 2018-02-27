@@ -14,6 +14,34 @@
   <sql id="Base_Column_List">
     id, category_name, name, des, pro_pic_url, price, enable, del_flag
   </sql>
+  <sql id="condition">
+    <where>
+      <if test="id != null">
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="categoryName != null">
+        and category_name = #{categoryName,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="des != null">
+        and des = #{des,jdbcType=VARCHAR}
+      </if>
+      <if test="proPicUrl != null">
+        and pro_pic_url = #{proPicUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="price != null">
+        and price = #{price,jdbcType=DECIMAL}
+      </if>
+      <if test="enable != null">
+        and enable = #{enable,jdbcType=BIT}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=BIT}
+      </if>
+    </where>
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

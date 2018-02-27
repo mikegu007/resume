@@ -2,6 +2,8 @@ package com.mike.resume.mapper;
 
 import com.mike.resume.entity.SUserAddress;
 
+import java.util.List;
+
 public interface SUserAddressMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -10,6 +12,8 @@ public interface SUserAddressMapper {
     int insertSelective(SUserAddress record);
 
     SUserAddress selectByPrimaryKey(Integer id);
+
+    List<SUserAddress> selectSelective(SUserAddress sUserAddress);
 
     int updateByPrimaryKeySelective(SUserAddress record);
 
