@@ -11,6 +11,10 @@ public class COrderDetail implements Serializable {
 
     private Boolean delFlag;
 
+    private CProduct cProduct;
+
+
+
     public Integer getId() {
         return id;
     }
@@ -41,5 +45,13 @@ public class COrderDetail implements Serializable {
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public CProduct getcProduct() {
+        return cProduct;
+    }
+
+    public void setcProduct(CProduct cProduct) {
+        this.cProduct = cProduct;
     }
 }

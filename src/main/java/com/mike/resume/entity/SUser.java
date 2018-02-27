@@ -2,6 +2,7 @@ package com.mike.resume.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class SUser implements Serializable{
     private Integer openId;
@@ -25,6 +26,8 @@ public class SUser implements Serializable{
     private Boolean enable;
 
     private Boolean delFlag;
+
+    private List<SUserAddress> sUserAddresses;
 
     public Integer getOpenId() {
         return openId;
@@ -112,5 +115,13 @@ public class SUser implements Serializable{
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public List<SUserAddress> getsUserAddresses() {
+        return sUserAddresses;
+    }
+
+    public void setsUserAddresses(List<SUserAddress> sUserAddresses) {
+        this.sUserAddresses = sUserAddresses;
     }
 }

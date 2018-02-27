@@ -3,6 +3,7 @@ package com.mike.resume.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 public class COrder implements Serializable {
     private String orderNo;
@@ -26,6 +27,8 @@ public class COrder implements Serializable {
     private String remark;
 
     private Boolean delFlag;
+
+    private List<COrderDetail> cOrderDetails;
 
     public String getOrderNo() {
         return orderNo;
@@ -113,5 +116,13 @@ public class COrder implements Serializable {
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public List<COrderDetail> getcOrderDetails() {
+        return cOrderDetails;
+    }
+
+    public void setcOrderDetails(List<COrderDetail> cOrderDetails) {
+        this.cOrderDetails = cOrderDetails;
     }
 }

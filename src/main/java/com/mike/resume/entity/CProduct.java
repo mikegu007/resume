@@ -2,6 +2,7 @@ package com.mike.resume.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CProduct implements Serializable {
     private Integer id;
@@ -19,6 +20,11 @@ public class CProduct implements Serializable {
     private Boolean enable;
 
     private Boolean delFlag;
+
+    private List<CProductSize> cProductSizes;
+
+    private List<CProductTaste> cProductTastes;
+
 
     public Integer getId() {
         return id;
@@ -82,5 +88,21 @@ public class CProduct implements Serializable {
 
     public void setDelFlag(Boolean delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public List<CProductSize> getcProductSizes() {
+        return cProductSizes;
+    }
+
+    public void setcProductSizes(List<CProductSize> cProductSizes) {
+        this.cProductSizes = cProductSizes;
+    }
+
+    public List<CProductTaste> getcProductTastes() {
+        return cProductTastes;
+    }
+
+    public void setcProductTastes(List<CProductTaste> cProductTastes) {
+        this.cProductTastes = cProductTastes;
     }
 }
