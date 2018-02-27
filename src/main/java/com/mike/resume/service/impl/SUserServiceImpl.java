@@ -16,15 +16,13 @@ import java.util.List;
 /**
  * Created by Mike on 2017/7/19.
  */
-@Service("userService")
-public class UserServiceImpl {
-    private static Logger logger = Logger.getLogger(UserServiceImpl.class);
+@Service("sUserService")
+public class SUserServiceImpl {
+    private static Logger logger = Logger.getLogger(SUserServiceImpl.class);
 
     @Autowired
     private SUserMapper sUserMapper;
 
-
-    
     public ResponseResult<SUser> deleteByPrimaryKey(int id) {
         logger.info("方法 deleteByPrimaryKey 开始");
         logger.debug("方法 deleteByPrimaryKey 开始,参数 id:" + JSON.toJSONString(id));
@@ -43,21 +41,21 @@ public class UserServiceImpl {
     }
 
     
-    public ResponseResult<SUser> insertSUser(SUser sUserInfo) {
+    public ResponseResult<SUser> insertSUser(SUser sUser) {
         logger.info("方法 insertSUser 开始");
-        logger.debug("方法 insertSUser 开始,参数 sUserInfo:" + JSON.toJSONString(sUserInfo));
+        logger.debug("方法 insertSUser 开始,参数 sUser:" + JSON.toJSONString(sUser));
         ResponseResult<SUser> result = new ResponseResult<>();
-        if (StringUtil.isNotNull(sUserInfo)&&StringUtil.isNotNull(sUserInfo.getOpenId())){
-            SUser sUser = sUserMapper.selectByPrimaryKey(sUserInfo.getOpenId());
-            if (StringUtil.isNotNull(sUser)){
+        if (StringUtil.isNotNull(sUser)&&StringUtil.isNotNull(sUser.getOpenId())){
+            SUser sUserOld = sUserMapper.selectByPrimaryKey(sUser.getOpenId());
+            if (StringUtil.isNotNull(sUserOld)){
                 result.setCode(false);
                 result.setMsg("用户信息已存在，请勿重复添加！");
             }else {
-                int flag = sUserMapper.insertSelective(sUserInfo);
+                int flag = sUserMapper.insertSelective(sUser);
                 if (flag>0){
                     result.setCode(true);
                     result.setMsg("加入用户信息成功！");
-                    result.setContent(sUserInfo);
+                    result.setContent(sUser);
                 }else {
                     result.setCode(false);
                     result.setMsg("加入用户信息失败！");
@@ -73,43 +71,43 @@ public class UserServiceImpl {
     }
 
     
-    public BootGrid<SUser> loadSUserInfo(BootGrid<SUser> grid, SUser sUserInfo) {
-        logger.info("方法 loadSUserInfo 开始");
-        logger.debug("方法 loadSUserInfo 开始,参数 grid:" + JSON.toJSONString(grid)+"参数 sUserInfo:" + JSON.toJSONString(sUserInfo));
+    public BootGrid<SUser> selSUser(BootGrid<SUser> grid, SUser sUser) {
+        logger.info("方法 selSUser 开始");
+        logger.debug("方法 selSUser 开始,参数 grid:" + JSON.toJSONString(grid)+"参数 sUser:" + JSON.toJSONString(sUser));
         PageHelper.startPage(grid.getCurrent(), grid.getRowCount());
-        grid.setRows(sUserMapper.selectSelective(sUserInfo,grid.getSort()));
-        grid.setTotal(sUserMapper.selectSelective(sUserInfo,grid.getSort()).size());
+        grid.setRows(sUserMapper.selectSelective(sUser));
+        grid.setTotal(sUserMapper.selectSelective(sUser).size());
         grid.setResult(true);
-        logger.debug("方法 loadSUserInfo 结束，return:" + JSON.toJSONString(grid));
-        logger.info("方法 loadSUserInfo 结束");
+        logger.debug("方法 selSUser 结束，return:" + JSON.toJSONString(grid));
+        logger.info("方法 selSUser 结束");
         return grid;
     }
 
     
-    public ResponseResult<SUser> selContentById(int id) {
-        logger.info("方法 selContentById 开始");
-        logger.debug("方法 selContentById 开始,参数 id:" + JSON.toJSONString(id));
+    public ResponseResult<SUser> selSUserById(int id) {
+        logger.info("方法 selSUserById 开始");
+        logger.debug("方法 selSUserById 开始,参数 id:" + JSON.toJSONString(id));
         ResponseResult<SUser> result = new ResponseResult<>();
-        SUser sUserInfo = sUserMapper.selectByPrimaryKey(id);
-        if (StringUtil.isNotNull(sUserInfo)){
+        SUser sUser = sUserMapper.selectByPrimaryKey(id);
+        if (StringUtil.isNotNull(sUser)){
             result.setCode(true);
             result.setMsg("查询成功");
-            result.setContent(sUserInfo);
+            result.setContent(sUser);
         }else {
             result.setCode(false);
             result.setMsg("查询失败");
         }
-        logger.debug("方法 selContentById 结束，return:" + JSON.toJSONString(result));
-        logger.info("方法 selContentById 结束");
+        logger.debug("方法 selSUserById 结束，return:" + JSON.toJSONString(result));
+        logger.info("方法 selSUserById 结束");
         return result;
     }
 
     
-    public ResponseResult<SUser> selectSelective(SUser sUserInfo) {
+    public ResponseResult<SUser> selectSelective(SUser sUser) {
         logger.info("方法 selectSelective 开始");
-        logger.debug("方法 selectSelective 开始,参数 sUserInfo:" + JSON.toJSONString(sUserInfo));
+        logger.debug("方法 selectSelective 开始,参数 sUser:" + JSON.toJSONString(sUser));
         ResponseResult<SUser> result = new ResponseResult<>();
-        List<SUser> sUsers = sUserMapper.selectSelective(sUserInfo,null);
+        List<SUser> sUsers = sUserMapper.selectSelective(sUser);
         if (StringUtil.isNotNull(sUsers)){
             result.setCode(true);
             result.setMsg("查询成功");
