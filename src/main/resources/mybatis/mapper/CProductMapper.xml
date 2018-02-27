@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mike.resume.mapper.CProductMapper">
+  <resultMap id="BaseResultMap" type="com.mike.resume.entity.CProduct">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="category_name" jdbcType="VARCHAR" property="categoryName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+    <result column="pro_pic_url" jdbcType="VARCHAR" property="proPicUrl" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="enable" jdbcType="BIT" property="enable" />
+    <result column="del_flag" jdbcType="BIT" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, category_name, name, des, pro_pic_url, price, enable, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from c_product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from c_product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mike.resume.entity.CProduct" useGeneratedKeys="true" keyProperty="id">
+    insert into c_product (id, category_name, name, 
+      des, pro_pic_url, price, 
+      enable, del_flag)
+    values (#{id,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{des,jdbcType=VARCHAR}, #{proPicUrl,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{enable,jdbcType=BIT}, #{delFlag,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mike.resume.entity.CProduct" useGeneratedKeys="true" keyProperty="id">
+    insert into c_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="categoryName != null">
+        category_name,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="des != null">
+        des,
+      </if>
+      <if test="proPicUrl != null">
+        pro_pic_url,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="enable != null">
+        enable,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="proPicUrl != null">
+        #{proPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=BIT},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mike.resume.entity.CProduct">
+    update c_product
+    <set>
+      <if test="categoryName != null">
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        des = #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="proPicUrl != null">
+        pro_pic_url = #{proPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="enable != null">
+        enable = #{enable,jdbcType=BIT},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.CProduct">
+    update c_product
+    set category_name = #{categoryName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      des = #{des,jdbcType=VARCHAR},
+      pro_pic_url = #{proPicUrl,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      enable = #{enable,jdbcType=BIT},
+      del_flag = #{delFlag,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

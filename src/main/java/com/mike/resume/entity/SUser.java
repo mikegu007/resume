@@ -3,7 +3,7 @@ package com.mike.resume.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class SUser implements Serializable {
+public class SUser implements Serializable{
     private Integer openId;
 
     private String avatarUrl;
