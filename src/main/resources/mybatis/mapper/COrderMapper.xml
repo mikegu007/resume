@@ -3,7 +3,7 @@
 <mapper namespace="com.mike.resume.mapper.COrderMapper">
   <resultMap id="BaseResultMap" type="com.mike.resume.entity.COrder">
     <id column="order_no" jdbcType="VARCHAR" property="orderNo" />
-    <result column="open_id" jdbcType="INTEGER" property="openId" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
     <result column="amount_actual" jdbcType="DECIMAL" property="amountActual" />
@@ -24,7 +24,7 @@
         and order_no = #{orderNo,jdbcType=VARCHAR}
       </if>
       <if test="openId != null">
-        and open_id = #{openId,jdbcType=INTEGER}
+        and open_id = #{openId,jdbcType=VARCHAR}
       </if>
       <if test="createTime != null">
         and create_time = #{createTime,jdbcType=TIMESTAMP}
@@ -70,7 +70,7 @@
       pay_time, amount_actual, amount, 
       detail_count, status, has_pay, 
       remark, del_flag)
-    values (#{orderNo,jdbcType=VARCHAR}, #{openId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{orderNo,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{payTime,jdbcType=TIMESTAMP}, #{amountActual,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
       #{detailCount,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{hasPay,jdbcType=BIT}, 
       #{remark,jdbcType=VARCHAR}, #{delFlag,jdbcType=BIT})
@@ -117,7 +117,7 @@
         #{orderNo,jdbcType=VARCHAR},
       </if>
       <if test="openId != null">
-        #{openId,jdbcType=INTEGER},
+        #{openId,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -152,7 +152,7 @@
     update c_order
     <set>
       <if test="openId != null">
-        open_id = #{openId,jdbcType=INTEGER},
+        open_id = #{openId,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -186,7 +186,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.COrder">
     update c_order
-    set open_id = #{openId,jdbcType=INTEGER},
+    set open_id = #{openId,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       pay_time = #{payTime,jdbcType=TIMESTAMP},
       amount_actual = #{amountActual,jdbcType=DECIMAL},

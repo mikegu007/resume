@@ -6,7 +6,7 @@ import java.util.Date;
 public class SUserToken implements Serializable {
     private Integer id;
 
-    private Integer openId;
+    private String openId;
 
     private Date createTime;
 
@@ -20,11 +20,11 @@ public class SUserToken implements Serializable {
         this.id = id;
     }
 
-    public Integer getOpenId() {
+    public String getOpenId() {
         return openId;
     }
 
-    public void setOpenId(Integer openId) {
+    public void setOpenId(String openId) {
         this.openId = openId;
     }
 

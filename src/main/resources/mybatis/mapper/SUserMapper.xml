@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mike.resume.mapper.SUserMapper">
   <resultMap id="BaseResultMap" type="com.mike.resume.entity.SUser">
-    <id column="open_id" jdbcType="INTEGER" property="openId" />
+    <id column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="country" jdbcType="VARCHAR" property="country" />
@@ -21,7 +21,7 @@
   <sql id="condition">
     <where>
       <if test="openId != null">
-        and open_id = #{openId,jdbcType=INTEGER}
+        and open_id = #{openId,jdbcType=VARCHAR}
       </if>
       <if test="avatarUrl != null">
         and avatar_url = #{avatarUrl,jdbcType=VARCHAR}
@@ -59,7 +59,7 @@
     select 
     <include refid="Base_Column_List" />
     from s_user
-    where open_id = #{openId,jdbcType=INTEGER}
+    where open_id = #{openId,jdbcType=VARCHAR}
   </select>
   <select id="selectSelective" resultMap="BaseResultMap">
     select
@@ -70,14 +70,14 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from s_user
-    where open_id = #{openId,jdbcType=INTEGER}
+    where open_id = #{openId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.mike.resume.entity.SUser" useGeneratedKeys="true" keyProperty="openId">
     insert into s_user (open_id, avatar_url, city, 
       country, province, language, 
       nick_name, gender, create_time, 
       enable, del_flag)
-    values (#{openId,jdbcType=INTEGER}, #{avatarUrl,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+    values (#{openId,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
       #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{enable,jdbcType=BIT}, #{delFlag,jdbcType=BIT})
@@ -121,7 +121,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="openId != null">
-        #{openId,jdbcType=INTEGER},
+        #{openId,jdbcType=VARCHAR},
       </if>
       <if test="avatarUrl != null">
         #{avatarUrl,jdbcType=VARCHAR},
@@ -189,7 +189,7 @@
         del_flag = #{delFlag,jdbcType=BIT},
       </if>
     </set>
-    where open_id = #{openId,jdbcType=INTEGER}
+    where open_id = #{openId,jdbcType=VARCHAR}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.SUser">
     update s_user
@@ -203,6 +203,6 @@
       create_time = #{createTime,jdbcType=TIMESTAMP},
       enable = #{enable,jdbcType=BIT},
       del_flag = #{delFlag,jdbcType=BIT}
-    where open_id = #{openId,jdbcType=INTEGER}
+    where open_id = #{openId,jdbcType=VARCHAR}
   </update>
 </mapper>

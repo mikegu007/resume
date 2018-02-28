@@ -28,10 +28,10 @@ public class SUserAddressServiceImpl {
         logger.debug("方法 deleteByPrimaryKey 开始,参数 id:" + JSON.toJSONString(id));
         ResponseResult<SUserAddress> result = new ResponseResult<>();
         int flag = sUserAddressMapper.deleteByPrimaryKey(id);
-        if (flag>0){
+        if (flag > 0) {
             result.setCode(true);
             result.setMsg("删除成功！");
-        }else {
+        } else {
             result.setCode(false);
             result.setMsg("删除失败！");
         }
@@ -40,28 +40,22 @@ public class SUserAddressServiceImpl {
         return result;
     }
 
-    
+
     public ResponseResult<SUserAddress> insertSUserAddress(SUserAddress sUserAddress) {
         logger.info("方法 insertSUserAddress 开始");
         logger.debug("方法 insertSUserAddress 开始,参数 sUserAddress:" + JSON.toJSONString(sUserAddress));
         ResponseResult<SUserAddress> result = new ResponseResult<>();
-        if (StringUtil.isNotNull(sUserAddress)&&StringUtil.isNotNull(sUserAddress.getOpenId())){
-            SUserAddress sUserAddressOld = sUserAddressMapper.selectByPrimaryKey(sUserAddress.getOpenId());
-            if (StringUtil.isNotNull(sUserAddressOld)){
+        if (StringUtil.isNotNull(sUserAddress) && StringUtil.isNotNull(sUserAddress.getOpenId())) {
+            int flag = sUserAddressMapper.insertSelective(sUserAddress);
+            if (flag > 0) {
+                result.setCode(true);
+                result.setMsg("加入用户地址成功！");
+                result.setContent(sUserAddress);
+            } else {
                 result.setCode(false);
-                result.setMsg("用户地址已存在，请勿重复添加！");
-            }else {
-                int flag = sUserAddressMapper.insertSelective(sUserAddress);
-                if (flag>0){
-                    result.setCode(true);
-                    result.setMsg("加入用户地址成功！");
-                    result.setContent(sUserAddress);
-                }else {
-                    result.setCode(false);
-                    result.setMsg("加入用户地址失败！");
-                }
+                result.setMsg("加入用户地址失败！");
             }
-        }else {
+        } else {
             result.setCode(false);
             result.setMsg("数据有误，加入用户地址失败！");
         }
@@ -70,10 +64,10 @@ public class SUserAddressServiceImpl {
         return result;
     }
 
-    
+
     public BootGrid<SUserAddress> selSUserAddress(BootGrid<SUserAddress> grid, SUserAddress sUserAddress) {
         logger.info("方法 selSUserAddress 开始");
-        logger.debug("方法 selSUserAddress 开始,参数 grid:" + JSON.toJSONString(grid)+"参数 sUserAddress:" + JSON.toJSONString(sUserAddress));
+        logger.debug("方法 selSUserAddress 开始,参数 grid:" + JSON.toJSONString(grid) + "参数 sUserAddress:" + JSON.toJSONString(sUserAddress));
         PageHelper.startPage(grid.getCurrent(), grid.getRowCount());
         grid.setRows(sUserAddressMapper.selectSelective(sUserAddress));
         grid.setTotal(sUserAddressMapper.selectSelective(sUserAddress).size());
@@ -83,17 +77,17 @@ public class SUserAddressServiceImpl {
         return grid;
     }
 
-    
+
     public ResponseResult<SUserAddress> selSUserAddressById(int id) {
         logger.info("方法 selSUserAddressById 开始");
         logger.debug("方法 selSUserAddressById 开始,参数 id:" + JSON.toJSONString(id));
         ResponseResult<SUserAddress> result = new ResponseResult<>();
         SUserAddress sUserAddress = sUserAddressMapper.selectByPrimaryKey(id);
-        if (StringUtil.isNotNull(sUserAddress)){
+        if (StringUtil.isNotNull(sUserAddress)) {
             result.setCode(true);
             result.setMsg("查询成功");
             result.setContent(sUserAddress);
-        }else {
+        } else {
             result.setCode(false);
             result.setMsg("查询失败");
         }
@@ -102,17 +96,17 @@ public class SUserAddressServiceImpl {
         return result;
     }
 
-    
+
     public ResponseResult<SUserAddress> selectSelective(SUserAddress sUserAddress) {
         logger.info("方法 selectSelective 开始");
         logger.debug("方法 selectSelective 开始,参数 sUserAddress:" + JSON.toJSONString(sUserAddress));
         ResponseResult<SUserAddress> result = new ResponseResult<>();
         List<SUserAddress> sUserAddresss = sUserAddressMapper.selectSelective(sUserAddress);
-        if (StringUtil.isNotNull(sUserAddresss)){
+        if (StringUtil.isNotNull(sUserAddresss)) {
             result.setCode(true);
             result.setMsg("查询成功");
             result.setResult(sUserAddresss);
-        }else {
+        } else {
             result.setCode(false);
             result.setMsg("查询失败");
         }

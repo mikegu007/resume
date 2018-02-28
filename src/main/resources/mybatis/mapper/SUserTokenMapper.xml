@@ -3,7 +3,7 @@
 <mapper namespace="com.mike.resume.mapper.SUserTokenMapper">
   <resultMap id="BaseResultMap" type="com.mike.resume.entity.SUserToken">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="open_id" jdbcType="INTEGER" property="openId" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
   </resultMap>
@@ -16,7 +16,7 @@
         and id = #{id,jdbcType=INTEGER}
       </if>
       <if test="openId != null">
-        and open_id = #{openId,jdbcType=INTEGER}
+        and open_id = #{openId,jdbcType=VARCHAR}
       </if>
       <if test="createTime != null">
         and create_time = #{createTime,jdbcType=TIMESTAMP}
@@ -32,6 +32,14 @@
     from s_user_token
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from s_user_token
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </select>
+
   <select id="selectSelective" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -46,7 +54,7 @@
   <insert id="insert" parameterType="com.mike.resume.entity.SUserToken" useGeneratedKeys="true" keyProperty="id">
     insert into s_user_token (id, open_id, create_time, 
       salt)
-    values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{salt,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mike.resume.entity.SUserToken" useGeneratedKeys="true" keyProperty="id">
@@ -70,7 +78,7 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="openId != null">
-        #{openId,jdbcType=INTEGER},
+        #{openId,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -84,7 +92,7 @@
     update s_user_token
     <set>
       <if test="openId != null">
-        open_id = #{openId,jdbcType=INTEGER},
+        open_id = #{openId,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -97,7 +105,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.SUserToken">
     update s_user_token
-    set open_id = #{openId,jdbcType=INTEGER},
+    set open_id = #{openId,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       salt = #{salt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

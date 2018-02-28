@@ -42,6 +42,26 @@ public class SUserController {
             if (StringUtil.isNotNull(appid)&&StringUtil.isNotNull(secret)&&StringUtil.isNotNull(js_code)){
                 url = url+"appid="+appid+"&secret="+secret+"&js_code="+js_code+"&grant_type="+authorization_code;
                 String wxResult = HttpUtil.syncData(url);
+                if (StringUtil.isNotNull(wxResult)){
+                    JSONObject wxResultJobject = JSON.parseObject(wxResult);
+                    String errcode = wxResultJobject.getString("errcode");
+                    String errmsg = wxResultJobject.getString("errmsg");
+                    String openid = wxResultJobject.getString("openid");
+                    String session_key = wxResultJobject.getString("session_key");
+                    String unionid = wxResultJobject.getString("unionid");
+
+                    if (StringUtil.isNotNull(errcode)||StringUtil.isNotNull(errmsg)){
+                        result.setCode(false);
+                        result.setMsg("调用wx接口错误时");
+                    }else if (StringUtil.isNotNull(openid)&&StringUtil.isNotNull(session_key)&&StringUtil.isNotNull(unionid)){
+                        SUserToken sUserToken = new SUserToken();
+                        sUserToken.setOpenId(openid);
+//                        sUserService.insertSUserToken()
+                    }
+                }else {
+                    result.setCode(false);
+                    result.setMsg("wx返回参数为空");
+                }
             }else {
                 result.setCode(false);
                 result.setMsg("参数不能为空");

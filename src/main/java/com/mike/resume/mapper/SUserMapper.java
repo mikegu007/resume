@@ -13,7 +13,7 @@ public interface SUserMapper {
 
     int insertSelective(SUser record);
 
-    SUser selectByPrimaryKey(Integer openId);
+    SUser selectByPrimaryKey(String openId);
 
     List<SUser> selectSelective(SUser sUser);
 

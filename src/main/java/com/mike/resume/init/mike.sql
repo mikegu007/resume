@@ -10,10 +10,115 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2017-11-08 10:12:16
+Date: 2018-02-28 14:28:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for c_card
+-- ----------------------------
+DROP TABLE IF EXISTS `c_card`;
+CREATE TABLE `c_card` (
+  `id` int(11) NOT NULL,
+  `open_id` varchar(50) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `del_flag` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of c_card
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for c_order
+-- ----------------------------
+DROP TABLE IF EXISTS `c_order`;
+CREATE TABLE `c_order` (
+  `order_no` varchar(255) NOT NULL,
+  `open_id` varchar(50) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `pay_time` datetime DEFAULT NULL,
+  `amount_actual` decimal(40,0) DEFAULT NULL,
+  `amount` decimal(40,0) DEFAULT NULL,
+  `detail_count` int(11) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
+  `has_pay` bit(1) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `del_flag` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`order_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of c_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for c_order_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `c_order_detail`;
+CREATE TABLE `c_order_detail` (
+  `id` int(11) NOT NULL,
+  `order_no` varchar(255) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `del_flag` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of c_order_detail
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for c_product
+-- ----------------------------
+DROP TABLE IF EXISTS `c_product`;
+CREATE TABLE `c_product` (
+  `id` int(11) NOT NULL,
+  `category_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `des` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `pro_pic_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `price` decimal(40,0) DEFAULT NULL,
+  `enable` bit(1) DEFAULT b'1' COMMENT '是否启用',
+  `del_flag` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of c_product
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for c_product_size
+-- ----------------------------
+DROP TABLE IF EXISTS `c_product_size`;
+CREATE TABLE `c_product_size` (
+  `id` int(11) NOT NULL,
+  `c_product_id` int(11) DEFAULT NULL,
+  `size_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of c_product_size
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for c_product_taste
+-- ----------------------------
+DROP TABLE IF EXISTS `c_product_taste`;
+CREATE TABLE `c_product_taste` (
+  `id` int(11) NOT NULL,
+  `c_product_id` int(11) DEFAULT NULL,
+  `taste_name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of c_product_taste
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for lottery
@@ -72,28 +177,18 @@ INSERT INTO `lottery` VALUES ('60', '17131', '2017-11-07 00:00:00', '1', '7', '1
 -- ----------------------------
 DROP TABLE IF EXISTS `s_user`;
 CREATE TABLE `s_user` (
-  `code` varchar(40) NOT NULL COMMENT '会员账号',
-  `email` varchar(40) DEFAULT NULL COMMENT '邮箱地址',
-  `phone` bigint(40) DEFAULT NULL COMMENT '手机号',
-  `weibo_code` varchar(80) DEFAULT NULL,
-  `wechat_code` varchar(80) DEFAULT NULL,
-  `qq_code` varchar(80) DEFAULT NULL,
-  `safe_number` int(11) unsigned zerofill DEFAULT NULL,
-  `is_bind_secur` bit(1) DEFAULT b'0' COMMENT '是否绑定密保',
-  `password` varchar(80) NOT NULL COMMENT '密码',
-  `login_count` int(11) DEFAULT NULL COMMENT '登录次数',
+  `open_id` varchar(50) NOT NULL,
+  `avatar_url` varchar(250) DEFAULT NULL COMMENT '用户头像',
+  `city` varchar(120) DEFAULT NULL COMMENT '用户所在城市',
+  `country` varchar(120) DEFAULT NULL COMMENT '用户所在国家',
+  `province` varchar(120) DEFAULT NULL COMMENT '用户所在省份',
+  `language` varchar(120) DEFAULT NULL COMMENT '用户的语言,简体中文为zh_CN',
+  `nick_name` varchar(80) DEFAULT NULL COMMENT '用户昵称',
+  `gender` int(11) DEFAULT '0' COMMENT '性别值为1时是男性，值为2时是女性，值为0时是未知',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `last_login_time` datetime DEFAULT NULL COMMENT '最后登陆时间',
-  `enable` bit(1) NOT NULL COMMENT '是否启用',
-  `last_login_ip` varchar(40) DEFAULT NULL COMMENT '最后登录ip地址',
-  `source` tinyint(4) DEFAULT NULL COMMENT '来源',
-  `salt` varchar(50) DEFAULT NULL COMMENT '盐',
-  `locked` bit(1) DEFAULT NULL COMMENT '是否锁定',
-  `del_flag` bit(1) DEFAULT NULL,
-  `corp_id` int(10) DEFAULT NULL,
-  `dept_id` int(10) DEFAULT NULL,
-  PRIMARY KEY (`code`),
-  KEY `code` (`code`) USING BTREE
+  `enable` bit(1) NOT NULL DEFAULT b'1' COMMENT '是否启用',
+  `del_flag` bit(1) NOT NULL DEFAULT b'0' COMMENT '删除标志',
+  PRIMARY KEY (`open_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -101,15 +196,32 @@ CREATE TABLE `s_user` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for s_user_address
+-- ----------------------------
+DROP TABLE IF EXISTS `s_user_address`;
+CREATE TABLE `s_user_address` (
+  `id` int(11) NOT NULL,
+  `open_id` varchar(50) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `postcode` varchar(255) NOT NULL COMMENT '邮编',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of s_user_address
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for s_user_token
 -- ----------------------------
 DROP TABLE IF EXISTS `s_user_token`;
 CREATE TABLE `s_user_token` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `user_code` varchar(50) NOT NULL COMMENT '用户id',
-  `token` int(11) NOT NULL COMMENT 'token值',
-  `last_time` datetime NOT NULL COMMENT '登录时间',
-  `expire_time` datetime NOT NULL COMMENT '过期时间',
+  `id` int(11) NOT NULL,
+  `open_id` varchar(50) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `salt` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

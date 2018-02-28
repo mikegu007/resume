@@ -13,6 +13,8 @@ public interface SUserTokenMapper {
 
     SUserToken selectByPrimaryKey(Integer id);
 
+    SUserToken selectByOpenId(String openId);
+
     List<SUserToken> selectSelective(SUserToken sUserToken);
 
     int updateByPrimaryKeySelective(SUserToken record);

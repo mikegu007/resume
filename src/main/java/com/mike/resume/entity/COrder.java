@@ -8,7 +8,7 @@ import java.util.List;
 public class COrder implements Serializable {
     private String orderNo;
 
-    private Integer openId;
+    private String openId;
 
     private Date createTime;
 
@@ -38,11 +38,11 @@ public class COrder implements Serializable {
         this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
-    public Integer getOpenId() {
+    public String getOpenId() {
         return openId;
     }
 
-    public void setOpenId(Integer openId) {
+    public void setOpenId(String openId) {
         this.openId = openId;
     }
 

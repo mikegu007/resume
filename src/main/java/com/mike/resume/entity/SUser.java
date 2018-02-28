@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SUser implements Serializable{
-    private Integer openId;
+    private String openId;
 
     private String avatarUrl;
 
@@ -29,11 +29,11 @@ public class SUser implements Serializable{
 
     private List<SUserAddress> sUserAddresses;
 
-    public Integer getOpenId() {
+    public String getOpenId() {
         return openId;
     }
 
-    public void setOpenId(Integer openId) {
+    public void setOpenId(String openId) {
         this.openId = openId;
     }
 

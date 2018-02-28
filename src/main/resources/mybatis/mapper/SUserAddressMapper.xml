@@ -3,7 +3,7 @@
 <mapper namespace="com.mike.resume.mapper.SUserAddressMapper">
   <resultMap id="BaseResultMap" type="com.mike.resume.entity.SUserAddress">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="open_id" jdbcType="INTEGER" property="openId" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="telephone" jdbcType="VARCHAR" property="telephone" />
@@ -18,7 +18,7 @@
         and id = #{id,jdbcType=INTEGER}
       </if>
       <if test="openId != null">
-        and open_id = #{openId,jdbcType=INTEGER}
+        and open_id = #{openId,jdbcType=VARCHAR}
       </if>
       <if test="name != null">
         and name = #{name,jdbcType=VARCHAR}
@@ -48,7 +48,7 @@
     insert into s_user_address (id, open_id, name, 
       address, telephone, postcode
       )
-    values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
       #{address,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}
       )
   </insert>
@@ -79,7 +79,7 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="openId != null">
-        #{openId,jdbcType=INTEGER},
+        #{openId,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -99,7 +99,7 @@
     update s_user_address
     <set>
       <if test="openId != null">
-        open_id = #{openId,jdbcType=INTEGER},
+        open_id = #{openId,jdbcType=VARCHAR},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -118,7 +118,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.SUserAddress">
     update s_user_address
-    set open_id = #{openId,jdbcType=INTEGER},
+    set open_id = #{openId,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       address = #{address,jdbcType=VARCHAR},
       telephone = #{telephone,jdbcType=VARCHAR},

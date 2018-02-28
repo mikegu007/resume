@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class SUserAddress implements Serializable {
     private Integer id;
 
-    private Integer openId;
+    private String openId;
 
     private String name;
 
@@ -23,11 +23,11 @@ public class SUserAddress implements Serializable {
         this.id = id;
     }
 
-    public Integer getOpenId() {
+    public String getOpenId() {
         return openId;
     }
 
-    public void setOpenId(Integer openId) {
+    public void setOpenId(String openId) {
         this.openId = openId;
     }
 
