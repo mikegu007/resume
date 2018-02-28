@@ -70,6 +70,29 @@ public class CProductServiceImpl {
         return result;
     }
 
+    public ResponseResult<CProduct> updateCProduct(CProduct cProduct) {
+        logger.info("方法 updateCProduct 开始");
+        logger.debug("方法 updateCProduct 开始,参数 cProduct:" + JSON.toJSONString(cProduct));
+        ResponseResult<CProduct> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(cProduct) && StringUtil.isNotNull(cProduct.getId())) {
+            int flag = cProductMapper.updateByPrimaryKeySelective(cProduct);
+            if (flag > 0) {
+                result.setCode(true);
+                result.setMsg("更新产品成功！");
+                result.setContent(cProduct);
+            } else {
+                result.setCode(false);
+                result.setMsg("更新产品失败！");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("数据有误，更新产品失败！");
+        }
+        logger.debug("方法 updateCProduct 结束，return:" + JSON.toJSONString(result));
+        logger.info("方法 updateCProduct 结束");
+        return result;
+    }
+
     
     public BootGrid<CProduct> selCProduct(BootGrid<CProduct> grid, CProduct cProduct) {
         logger.info("方法 selCProduct 开始");

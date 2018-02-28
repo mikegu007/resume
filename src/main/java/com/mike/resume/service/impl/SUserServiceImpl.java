@@ -75,6 +75,32 @@ public class SUserServiceImpl {
         return result;
     }
 
+
+
+    public ResponseResult<SUser> updateSUser(SUser sUser) {
+        logger.info("方法 updateSUser 开始");
+        logger.debug("方法 updateSUser 开始,参数 sUser:" + JSON.toJSONString(sUser));
+        ResponseResult<SUser> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(sUser) && StringUtil.isNotNull(sUser.getOpenId())) {
+            int flag = sUserMapper.updateByPrimaryKeySelective(sUser);
+            if (flag > 0) {
+                result.setCode(true);
+                result.setMsg("更新用户成功！");
+                result.setContent(sUser);
+            } else {
+                result.setCode(false);
+                result.setMsg("更新用户败！");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("数据有误，更新用户失败！");
+        }
+        logger.debug("方法 updateSUser 结束，return:" + JSON.toJSONString(result));
+        logger.info("方法 updateSUser 结束");
+        return result;
+    }
+    
+
     
     public BootGrid<SUser> selSUser(BootGrid<SUser> grid, SUser sUser) {
         logger.info("方法 selSUser 开始");
@@ -151,7 +177,7 @@ public class SUserServiceImpl {
         logger.debug("方法 insertSUserToken 开始,参数 sUserToken:" + JSON.toJSONString(sUserToken));
         ResponseResult<SUserToken> result = new ResponseResult<>();
         if (StringUtil.isNotNull(sUserToken)&&StringUtil.isNotNull(sUserToken.getOpenId())){
-            SUserToken sUserTokenOld = sUserTokenMapper.selectByPrimaryKey(sUserToken.getId());
+            SUserToken sUserTokenOld = sUserTokenMapper.selectByOpenId(sUserToken.getOpenId());
             if (StringUtil.isNotNull(sUserTokenOld)){
                 result.setCode(false);
                 result.setMsg("用户信息已存在，请勿重复添加！");
@@ -174,6 +200,33 @@ public class SUserServiceImpl {
         logger.info("方法 insertSUserToken 结束");
         return result;
     }
+
+
+    public ResponseResult<SUserToken> updateSUserToken(SUserToken sUserToken) {
+        logger.info("方法 updateSUserToken 开始");
+        logger.debug("方法 updateSUserToken 开始,参数 sUserToken:" + JSON.toJSONString(sUserToken));
+        ResponseResult<SUserToken> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(sUserToken) && StringUtil.isNotNull(sUserToken.getId())) {
+            int flag = sUserTokenMapper.updateByPrimaryKeySelective(sUserToken);
+            if (flag > 0) {
+                result.setCode(true);
+                result.setMsg("更新用户状态成功！");
+                result.setContent(sUserToken);
+            } else {
+                result.setCode(false);
+                result.setMsg("更新用户状态败！");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("数据有误，更新用户状态失败！");
+        }
+        logger.debug("方法 updateSUserToken 结束，return:" + JSON.toJSONString(result));
+        logger.info("方法 updateSUserToken 结束");
+        return result;
+    }
+    
+    
+    
 
 
     public BootGrid<SUserToken> selSUserToken(BootGrid<SUserToken> grid, SUserToken sUserToken) {

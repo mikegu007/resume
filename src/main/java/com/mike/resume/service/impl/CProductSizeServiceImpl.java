@@ -40,7 +40,7 @@ public class CProductSizeServiceImpl {
         return result;
     }
 
-    
+
     public ResponseResult<CProductSize> insertCProductSize(CProductSize cProductSize) {
         logger.info("方法 insertCProductSize 开始");
         logger.debug("方法 insertCProductSize 开始,参数 cProductSize:" + JSON.toJSONString(cProductSize));
@@ -70,7 +70,31 @@ public class CProductSizeServiceImpl {
         return result;
     }
 
-    
+
+    public ResponseResult<CProductSize> updateCProductSize(CProductSize cProductSize) {
+        logger.info("方法 updateCProductSize 开始");
+        logger.debug("方法 updateCProductSize 开始,参数 cProductSize:" + JSON.toJSONString(cProductSize));
+        ResponseResult<CProductSize> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(cProductSize) && StringUtil.isNotNull(cProductSize.getId())) {
+            int flag = cProductSizeMapper.updateByPrimaryKeySelective(cProductSize);
+            if (flag > 0) {
+                result.setCode(true);
+                result.setMsg("更新产品规格成功！");
+                result.setContent(cProductSize);
+            } else {
+                result.setCode(false);
+                result.setMsg("更新产品规格败！");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("数据有误，更新产品规格失败！");
+        }
+        logger.debug("方法 updateCProductSize 结束，return:" + JSON.toJSONString(result));
+        logger.info("方法 updateCProductSize 结束");
+        return result;
+    }
+
+
     public BootGrid<CProductSize> selCProductSize(BootGrid<CProductSize> grid, CProductSize cProductSize) {
         logger.info("方法 selCProductSize 开始");
         logger.debug("方法 selCProductSize 开始,参数 grid:" + JSON.toJSONString(grid)+"参数 cProductSize:" + JSON.toJSONString(cProductSize));
@@ -83,7 +107,7 @@ public class CProductSizeServiceImpl {
         return grid;
     }
 
-    
+
     public ResponseResult<CProductSize> selCProductSizeById(int id) {
         logger.info("方法 selCProductSizeById 开始");
         logger.debug("方法 selCProductSizeById 开始,参数 id:" + JSON.toJSONString(id));
@@ -102,7 +126,7 @@ public class CProductSizeServiceImpl {
         return result;
     }
 
-    
+
     public ResponseResult<CProductSize> selectSelective(CProductSize cProductSize) {
         logger.info("方法 selectSelective 开始");
         logger.debug("方法 selectSelective 开始,参数 cProductSize:" + JSON.toJSONString(cProductSize));

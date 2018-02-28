@@ -65,6 +65,33 @@ public class SUserAddressServiceImpl {
     }
 
 
+
+    public ResponseResult<SUserAddress> updateSUserAddress(SUserAddress sUserAddress) {
+        logger.info("方法 updateSUserAddress 开始");
+        logger.debug("方法 updateSUserAddress 开始,参数 sUserAddress:" + JSON.toJSONString(sUserAddress));
+        ResponseResult<SUserAddress> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(sUserAddress) && StringUtil.isNotNull(sUserAddress.getId())) {
+            int flag = sUserAddressMapper.updateByPrimaryKeySelective(sUserAddress);
+            if (flag > 0) {
+                result.setCode(true);
+                result.setMsg("更新用户地址成功！");
+                result.setContent(sUserAddress);
+            } else {
+                result.setCode(false);
+                result.setMsg("更新用户地址败！");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("数据有误，更新用户地址失败！");
+        }
+        logger.debug("方法 updateSUserAddress 结束，return:" + JSON.toJSONString(result));
+        logger.info("方法 updateSUserAddress 结束");
+        return result;
+    }
+    
+    
+
+
     public BootGrid<SUserAddress> selSUserAddress(BootGrid<SUserAddress> grid, SUserAddress sUserAddress) {
         logger.info("方法 selSUserAddress 开始");
         logger.debug("方法 selSUserAddress 开始,参数 grid:" + JSON.toJSONString(grid) + "参数 sUserAddress:" + JSON.toJSONString(sUserAddress));

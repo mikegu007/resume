@@ -70,6 +70,33 @@ public class CProductTasteServiceImpl {
         return result;
     }
 
+    public ResponseResult<CProductTaste> updateCProductTaste(CProductTaste cProductTaste) {
+        logger.info("方法 updateCProductTaste 开始");
+        logger.debug("方法 updateCProductTaste 开始,参数 cProductTaste:" + JSON.toJSONString(cProductTaste));
+        ResponseResult<CProductTaste> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(cProductTaste) && StringUtil.isNotNull(cProductTaste.getId())) {
+            int flag = cProductTasteMapper.updateByPrimaryKeySelective(cProductTaste);
+            if (flag > 0) {
+                result.setCode(true);
+                result.setMsg("更新产品口味成功！");
+                result.setContent(cProductTaste);
+            } else {
+                result.setCode(false);
+                result.setMsg("更新产品口味败！");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("数据有误，更新产品口味失败！");
+        }
+        logger.debug("方法 updateCProductTaste 结束，return:" + JSON.toJSONString(result));
+        logger.info("方法 updateCProductTaste 结束");
+        return result;
+    }
+    
+    
+    
+    
+
     
     public BootGrid<CProductTaste> selCProductTaste(BootGrid<CProductTaste> grid, CProductTaste cProductTaste) {
         logger.info("方法 selCProductTaste 开始");

@@ -70,6 +70,29 @@ public class COrderServiceImpl {
         return result;
     }
 
+    public ResponseResult<COrder> updateCOrder(COrder cOrder) {
+        logger.info("方法 updateCOrder 开始");
+        logger.debug("方法 updateCOrder 开始,参数 cOrder:" + JSON.toJSONString(cOrder));
+        ResponseResult<COrder> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(cOrder) && StringUtil.isNotNull(cOrder.getOrderNo())) {
+            int flag = cOrderMapper.updateByPrimaryKeySelective(cOrder);
+            if (flag > 0) {
+                result.setCode(true);
+                result.setMsg("更新订单成功！");
+                result.setContent(cOrder);
+            } else {
+                result.setCode(false);
+                result.setMsg("更新订单失败！");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("数据有误，更新订单失败！");
+        }
+        logger.debug("方法 updateCOrder 结束，return:" + JSON.toJSONString(result));
+        logger.info("方法 updateCOrder 结束");
+        return result;
+    }
+
     
     public BootGrid<COrder> selCOrder(BootGrid<COrder> grid, COrder cOrder) {
         logger.info("方法 selCOrder 开始");
