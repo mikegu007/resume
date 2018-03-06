@@ -10,6 +10,11 @@
     <result column="price" jdbcType="DECIMAL" property="price" />
     <result column="enable" jdbcType="BIT" property="enable" />
     <result column="del_flag" jdbcType="BIT" property="delFlag" />
+
+    <collection property="cProductSizes" column="id"
+                select="com.mike.resume.mapper.CProductSizeMapper.selectByCProuctId" />
+    <collection property="cProductTastes" column="id"
+                select="com.mike.resume.mapper.CProductTasteMapper.selectByCProuctId" />
   </resultMap>
   <sql id="Base_Column_List">
     id, category_name, name, des, pro_pic_url, price, enable, del_flag
@@ -47,6 +52,13 @@
     <include refid="Base_Column_List" />
     from c_product
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from c_product
+    where 1=1
+    <include refid="condition" />
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from c_product

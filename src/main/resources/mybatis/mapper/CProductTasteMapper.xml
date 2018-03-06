@@ -28,6 +28,12 @@
     from c_product_taste
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByCProuctId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from c_product_taste
+    where c_product_id = #{cProductId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from c_product_taste
     where id = #{id,jdbcType=INTEGER}

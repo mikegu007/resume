@@ -15,6 +15,8 @@ public interface CProductSizeMapper {
 
     List<CProductSize> selectSelective(CProductSize cProductSize);
 
+    List<CProductSize> selectByCProuctId(Integer cProductId);
+
     int updateByPrimaryKeySelective(CProductSize record);
 
     int updateByPrimaryKey(CProductSize record);

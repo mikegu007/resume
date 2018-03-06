@@ -15,6 +15,8 @@ public interface CProductTasteMapper {
 
     List<CProductTaste> selectSelective(CProductTaste cProductTaste);
 
+    List<CProductTaste> selectByCProuctId(Integer cProductId);
+
     int updateByPrimaryKeySelective(CProductTaste record);
 
     int updateByPrimaryKey(CProductTaste record);
