@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.mike.common.ResponseResult;
 import com.mike.common.StringUtil;
+import com.mike.resume.entity.CCard;
 import com.mike.resume.entity.COrder;
-import com.mike.resume.entity.CProduct;
+import com.mike.resume.service.impl.CCardServiceImpl;
 import com.mike.resume.service.impl.COrderServiceImpl;
-import com.mike.resume.service.impl.CProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,27 +15,27 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
-public class COrderController {
+public class CCardController {
 
 
     @Autowired
-    private COrderServiceImpl cOrderService;
+    private CCardServiceImpl cCardService;
 
     /**
      * @param request
      * @param json
      * @return
      */
-    @RequestMapping(value = "/getOrders", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/getCards", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     public
     @ResponseBody
-    String getOrders(HttpServletRequest request, @RequestBody String json) {
-        ResponseResult<COrder> result = new ResponseResult<>();
+    String getCards(HttpServletRequest request, @RequestBody String json) {
+        ResponseResult<CCard> result = new ResponseResult<>();
         if (StringUtil.isNotNull(json)) {
             JSONObject sUser = JSON.parseObject(json);
-            COrder cOrder = sUser.getObject("order",COrder.class);
-            if (StringUtil.isNotNull(cOrder)&&StringUtil.isNotNull(cOrder.getOpenId())){
-                result = cOrderService.selectSelective(cOrder);
+            CCard cCard = sUser.getObject("order",CCard.class);
+            if (StringUtil.isNotNull(cCard)&&StringUtil.isNotNull(cCard.getOpenId())){
+                result = cCardService.selectSelective(cCard);
             }else {
                 result.setCode(false);
                 result.setMsg("参数不能为空");

@@ -6,7 +6,9 @@ import com.mike.common.ResponseResult;
 import com.mike.common.StringUtil;
 import com.mike.common.UtilGenerateID;
 import com.mike.resume.entity.SUser;
+import com.mike.resume.entity.SUserAddress;
 import com.mike.resume.entity.SUserToken;
+import com.mike.resume.service.impl.SUserAddressServiceImpl;
 import com.mike.resume.service.impl.SUserServiceImpl;
 import com.mike.resume.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,8 @@ public class SUserController {
 
     @Autowired
     private SUserServiceImpl sUserService;
-
+    @Autowired
+    private SUserAddressServiceImpl sUserAddressService;
     /**
      * login
      *
@@ -118,6 +121,97 @@ public class SUserController {
         }
         return JSON.toJSONString(result);
     }
+
+
+    /**
+     * 获取用户地址
+     * @param request
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/getUserAddress", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    public
+    @ResponseBody
+    String getUserAddress(HttpServletRequest request, @RequestBody String json) {
+        ResponseResult<SUserAddress> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(json)) {
+            JSONObject sUser = JSON.parseObject(json);
+            String openId = sUser.getString("openId");
+            if (StringUtil.isNotNull(openId)){
+                SUserAddress sUserAddress = new SUserAddress();
+                sUserAddress.setOpenId(openId);
+                result = sUserAddressService.selectSelective(sUserAddress);
+            }else {
+                result.setCode(false);
+                result.setMsg("参数不能为空");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("参数不能为空");
+        }
+        return JSON.toJSONString(result);
+    }
+
+
+    /**
+     * 新增/修改用户地址
+     * @param request
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/saveUserAddress", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    public
+    @ResponseBody
+    String saveUserAddress(HttpServletRequest request, @RequestBody String json) {
+        ResponseResult<SUserAddress> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(json)) {
+            JSONObject sUser = JSON.parseObject(json);
+            SUserAddress sUserAddress = sUser.getObject("userAddress",SUserAddress.class);
+            if (StringUtil.isNotNull(sUserAddress)){
+                if (StringUtil.isNotNull(sUserAddress.getId())){
+                    result = sUserAddressService.updateSUserAddress(sUserAddress);
+                }else {
+                    result = sUserAddressService.insertSUserAddress(sUserAddress);
+                }
+            }else {
+                result.setCode(false);
+                result.setMsg("参数不能为空");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("参数不能为空");
+        }
+        return JSON.toJSONString(result);
+    }
+
+
+    /**
+     * 删除用户地址
+     * @param request
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/delUserAddress", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    public
+    @ResponseBody
+    String delUserAddress(HttpServletRequest request, @RequestBody String json) {
+        ResponseResult<SUserAddress> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(json)) {
+            JSONObject sUser = JSON.parseObject(json);
+            Integer id = sUser.getInteger("id");
+            if (StringUtil.isNotNull(id)){
+                result = sUserAddressService.deleteByPrimaryKey(id);
+            }else {
+                result.setCode(false);
+                result.setMsg("参数不能为空");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("参数不能为空");
+        }
+        return JSON.toJSONString(result);
+    }
+
 
 
 }
