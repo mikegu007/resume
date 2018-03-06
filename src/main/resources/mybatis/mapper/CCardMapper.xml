@@ -32,6 +32,13 @@
     from c_card
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectSelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from c_card
+    where 1=1
+    <include refid="condition" />
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from c_card
     where id = #{id,jdbcType=INTEGER}

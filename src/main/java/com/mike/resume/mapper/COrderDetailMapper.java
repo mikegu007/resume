@@ -13,6 +13,8 @@ public interface COrderDetailMapper {
 
     COrderDetail selectByPrimaryKey(Integer id);
 
+    List<COrderDetail> selectByOrderNo(String orderNo);
+
     List<COrderDetail> selectSelective(COrderDetail cOrderDetail);
 
     int updateByPrimaryKeySelective(COrderDetail record);

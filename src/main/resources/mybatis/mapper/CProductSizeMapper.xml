@@ -34,6 +34,13 @@
     from c_product_size
     where c_product_id = #{cProductId,jdbcType=INTEGER}
   </select>
+  <select id="selectSelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from c_product_size
+    where 1=1
+    <include refid="condition" />
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from c_product_size
     where id = #{id,jdbcType=INTEGER}

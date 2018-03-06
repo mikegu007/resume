@@ -32,6 +32,19 @@
     from c_order_detail
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByOrderNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from c_order_detail
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </select>
+  <select id="selectSelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from c_order_detail
+    where 1=1
+    <include refid="condition" />
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from c_order_detail
     where id = #{id,jdbcType=INTEGER}
