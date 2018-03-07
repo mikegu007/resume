@@ -7,6 +7,7 @@ import com.mike.common.ResponseResult;
 import com.mike.common.StringUtil;
 import com.mike.common.UtilGenerateID;
 import com.mike.resume.entity.COrder;
+import com.mike.resume.entity.COrderDetail;
 import com.mike.resume.enums.EnumOrderStatus;
 import com.mike.resume.mapper.COrderDetailMapper;
 import com.mike.resume.mapper.COrderMapper;
@@ -64,18 +65,25 @@ public class COrderServiceImpl {
             cOrder.setCreateTime(new Date());
             cOrder.setHasPay(false);
             cOrder.setStatus(EnumOrderStatus.ToPay.getStatusCode());
+
+            //插入订单明细
+            for (COrderDetail c :cOrder.getcOrderDetails()) {
+                c.setOrderNo(orderNo);
+                cOrderDetailMapper.insertSelective(c);
+            }
+
             int flag = cOrderMapper.insertSelective(cOrder);
             if (flag > 0) {
                 result.setCode(true);
-                result.setMsg("加入产品成功！");
+                result.setMsg("加入订单成功！");
                 result.setContent(cOrder);
             } else {
                 result.setCode(false);
-                result.setMsg("加入产品失败！");
+                result.setMsg("加入订单失败！");
             }
         } else {
             result.setCode(false);
-            result.setMsg("数据有误，加入产品失败！");
+            result.setMsg("数据有误，加入订单失败！");
         }
         logger.debug("方法 insertCOrder 结束，return:" + JSON.toJSONString(result));
         logger.info("方法 insertCOrder 结束");
@@ -119,7 +127,7 @@ public class COrderServiceImpl {
     }
 
 
-    public ResponseResult<COrder> selCOrderById(String orderNo) {
+    public ResponseResult<COrder> selCOrderByOrderNo(String orderNo) {
         logger.info("方法 selCOrderById 开始");
         logger.debug("方法 selCOrderById 开始,参数 orderNo:" + JSON.toJSONString(orderNo));
         ResponseResult<COrder> result = new ResponseResult<>();
