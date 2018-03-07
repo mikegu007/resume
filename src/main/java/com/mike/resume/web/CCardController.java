@@ -26,7 +26,7 @@ public class CCardController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/getCards", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/getCards", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
     String getCards(HttpServletRequest request, @RequestBody String json) {

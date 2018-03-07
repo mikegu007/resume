@@ -32,7 +32,7 @@ public class SUserController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
     String login(HttpServletRequest request, @RequestBody String json) {
@@ -88,7 +88,7 @@ public class SUserController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/checkLogin", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/checkLogin", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
     String checkLogin(HttpServletRequest request, @RequestBody String json) {
@@ -129,7 +129,7 @@ public class SUserController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/getUserAddress", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/getUserAddress", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
     String getUserAddress(HttpServletRequest request, @RequestBody String json) {
@@ -159,7 +159,7 @@ public class SUserController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/saveUserAddress", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/saveUserAddress", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
     String saveUserAddress(HttpServletRequest request, @RequestBody String json) {
@@ -191,7 +191,7 @@ public class SUserController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/delUserAddress", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/delUserAddress", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
     String delUserAddress(HttpServletRequest request, @RequestBody String json) {

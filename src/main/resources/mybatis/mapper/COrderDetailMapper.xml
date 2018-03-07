@@ -8,7 +8,7 @@
     <result column="del_flag" jdbcType="BIT" property="delFlag" />
     <association property="cProduct" column="product_id" fetchType="eager"
                  javaType="com.mike.resume.entity.CProduct" select="com.mike.resume.mapper.CProductMapper.selectByPrimaryKey">
-
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     id, order_no, product_id, del_flag

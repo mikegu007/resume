@@ -26,7 +26,7 @@ public class COrderController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/getOrders", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/getOrders", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
     String getOrders(HttpServletRequest request, @RequestBody String json) {
@@ -52,7 +52,7 @@ public class COrderController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/addOrder", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+    @RequestMapping(value = "/addOrder", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
     String addOrder(HttpServletRequest request, @RequestBody String json) {
