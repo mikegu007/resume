@@ -1,18 +1,32 @@
 package com.mike.resume.entity;
 
 import java.io.Serializable;
-
+/**
+ * 用户地址实体
+ * @author Mike
+ * @date 2018/3/7
+ */
 public class SUserAddress implements Serializable {
     private Integer id;
-
+    /**
+     * 用户唯一标识
+     */
     private String openId;
-
+    /**
+     * 姓名
+     */
     private String name;
-
+    /**
+     * 地址
+     */
     private String address;
-
+    /**
+     * 手机号
+     */
     private String telephone;
-
+    /**
+     * 邮编
+     */
     private String postcode;
 
     public Integer getId() {

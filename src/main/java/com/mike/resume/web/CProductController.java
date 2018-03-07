@@ -25,7 +25,7 @@ public class CProductController {
     @RequestMapping(value = "/getAllProduct", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     public
     @ResponseBody
-    String login(HttpServletRequest request) {
+    String getAllProduct(HttpServletRequest request) {
         ResponseResult<CProduct> result = new ResponseResult<>();
         result = cProductService.selectSelective(new CProduct());
         return JSON.toJSONString(result);

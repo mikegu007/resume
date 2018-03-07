@@ -6,6 +6,9 @@
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
     <result column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="del_flag" jdbcType="BIT" property="delFlag" />
+    <association property="cProduct" column="product_id" fetchType="eager"
+                 javaType="com.mike.resume.entity.CProduct" select="com.mike.resume.mapper.CProductMapper.selectByPrimaryKey">
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     id, open_id, product_id, del_flag

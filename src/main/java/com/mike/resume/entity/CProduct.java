@@ -3,22 +3,40 @@ package com.mike.resume.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-
+/**
+ * 产品实体
+ * @author Mike
+ * @date 2018/3/7
+ */
 public class CProduct implements Serializable {
     private Integer id;
-
+    /**
+     * 分类名
+     */
     private String categoryName;
-
+    /**
+     * 产品名称
+     */
     private String name;
-
+    /**
+     * 产品描述
+     */
     private String des;
-
+    /**
+     * 产品logo
+     */
     private String proPicUrl;
-
+    /**
+     * 价格
+     */
     private BigDecimal price;
-
+    /**
+     * 是否启用
+     */
     private Boolean enable;
-
+    /**
+     * 删除标识
+     */
     private Boolean delFlag;
 
     private List<CProductSize> cProductSizes;

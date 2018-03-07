@@ -4,28 +4,55 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * 订单
+ * @author Mike
+ * @date 2018/3/7
+ */
 public class COrder implements Serializable {
+    /**
+     * 订单号唯一标识
+     */
     private String orderNo;
-
+    /**
+     * 用户唯一标识
+     */
     private String openId;
-
+    /**
+     * 创建时间
+     */
     private Date createTime;
-
+    /**
+     * 支付时间
+     */
     private Date payTime;
-
+    /**
+     * 实际支付金额
+     */
     private BigDecimal amountActual;
-
+    /**
+     * 支付金额
+     */
     private BigDecimal amount;
-
+    /**
+     * 明细数量
+     */
     private Integer detailCount;
-
+    /**
+     * 状态
+     */
     private Byte status;
-
+    /**
+     * 是否支付标识
+     */
     private Boolean hasPay;
-
+    /**
+     * 备注
+     */
     private String remark;
-
+    /**
+     * 删除标识
+     */
     private Boolean delFlag;
 
     private List<COrderDetail> cOrderDetails;

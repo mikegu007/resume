@@ -61,17 +61,18 @@ public class COrderServiceImpl {
                 orderNo = UtilGenerateID.generateID("") + cOrder.getOpenId();
             }
             while ((!StringUtil.isNotNull(cOrderMapper.selectByPrimaryKey(orderNo))));
-            cOrder.setOrderNo(orderNo);
-            cOrder.setCreateTime(new Date());
-            cOrder.setHasPay(false);
-            cOrder.setStatus(EnumOrderStatus.ToPay.getStatusCode());
+
 
             //插入订单明细
             for (COrderDetail c :cOrder.getcOrderDetails()) {
                 c.setOrderNo(orderNo);
                 cOrderDetailMapper.insertSelective(c);
             }
-
+            cOrder.setOrderNo(orderNo);
+            cOrder.setCreateTime(new Date());
+            cOrder.setHasPay(false);
+            cOrder.setStatus(EnumOrderStatus.ToPay.getStatusCode());
+            cOrder.setDetailCount(cOrder.getcOrderDetails().size());
             int flag = cOrderMapper.insertSelective(cOrder);
             if (flag > 0) {
                 result.setCode(true);

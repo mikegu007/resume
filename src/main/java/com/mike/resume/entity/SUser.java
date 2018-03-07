@@ -3,28 +3,55 @@ package com.mike.resume.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * 用户信息
+ * @author Mike
+ * @date 2018/3/7
+ */
 public class SUser implements Serializable{
+    /**
+     * 用户唯一标识
+     */
     private String openId;
-
+    /**
+     * 头像
+     */
     private String avatarUrl;
-
+    /**
+     * 城市
+     */
     private String city;
-
+    /**
+     * 国家
+     */
     private String country;
-
+    /**
+     * 省份
+     */
     private String province;
-
+    /**
+     * 语言
+     */
     private String language;
-
+    /**
+     * 昵称
+     */
     private String nickName;
-
+    /**
+     * 性别
+     */
     private Integer gender;
-
+    /**
+     * 创建时间
+     */
     private Date createTime;
-
+    /**
+     * 是否启用
+     */
     private Boolean enable;
-
+    /**
+     * 删除标识
+     */
     private Boolean delFlag;
 
     private List<SUserAddress> sUserAddresses;
