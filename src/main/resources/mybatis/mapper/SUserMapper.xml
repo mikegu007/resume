@@ -13,6 +13,8 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="enable" jdbcType="BIT" property="enable" />
     <result column="del_flag" jdbcType="BIT" property="delFlag" />
+    <collection property="sUserAddresses" column="open_id"
+                select="com.mike.resume.mapper.SUserAddressMapper.selectByOpenId" />
   </resultMap>
   <sql id="Base_Column_List">
     open_id, avatar_url, city, country, province, language, nick_name, gender, create_time, 

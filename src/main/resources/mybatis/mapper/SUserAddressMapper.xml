@@ -40,6 +40,12 @@
     from s_user_address
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from s_user_address
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </select>
   <select id="selectSelective" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

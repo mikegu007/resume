@@ -13,6 +13,8 @@ public interface SUserAddressMapper {
 
     SUserAddress selectByPrimaryKey(Integer id);
 
+    List<SUserAddress> selectByOpenId(String openId);
+
     List<SUserAddress> selectSelective(SUserAddress sUserAddress);
 
     int updateByPrimaryKeySelective(SUserAddress record);
