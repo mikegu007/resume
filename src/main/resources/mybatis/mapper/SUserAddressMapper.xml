@@ -5,7 +5,7 @@
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="open_id" jdbcType="VARCHAR" property="openId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="area" jdbcType="VARCHAR" property="address"/>
+        <result column="area" jdbcType="VARCHAR" property="area"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
         <result column="telephone" jdbcType="VARCHAR" property="telephone"/>
         <result column="postcode" jdbcType="VARCHAR" property="postcode"/>
@@ -63,7 +63,7 @@
     insert into s_user_address (id, open_id, name,area
       address, telephone, postcode
       )
-    values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{address,jdbcType=VARCHAR},
+    values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},#{area,jdbcType=VARCHAR},
       #{address,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{postcode,jdbcType=VARCHAR}
       )
   </insert>

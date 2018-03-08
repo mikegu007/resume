@@ -4,14 +4,18 @@
   <resultMap id="BaseResultMap" type="com.mike.resume.entity.CCard">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="open_id" jdbcType="VARCHAR" property="openId" />
-    <result column="product_id" jdbcType="INTEGER" property="productId" />
     <result column="del_flag" jdbcType="BIT" property="delFlag" />
-    <association property="cProduct" column="product_id" fetchType="eager"
-                 javaType="com.mike.resume.entity.CProduct" select="com.mike.resume.mapper.CProductMapper.selectByPrimaryKey">
-    </association>
+    <result column="p_category_name" jdbcType="VARCHAR" property="pCategoryName" />
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+    <result column="p_des" jdbcType="VARCHAR" property="pDes" />
+    <result column="p_pro_pic_url" jdbcType="VARCHAR" property="pProPicUrl" />
+    <result column="p_price" jdbcType="DECIMAL" property="pPrice" />
+    <result column="p_taste_name" jdbcType="VARCHAR" property="pTasteName" />
+    <result column="p_size_name" jdbcType="VARCHAR" property="pSizeName" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, open_id, product_id, del_flag
+    id, open_id, product_id, del_flag, p_category_name, p_name, p_des, p_pro_pic_url, p_price, p_taste_name,
+    p_size_name
   </sql>
   <sql id="condition">
       <if test="id != null">
@@ -26,6 +30,27 @@
       <if test="delFlag != null">
         and del_flag = #{delFlag,jdbcType=BIT}
       </if>
+    <if test="pCategoryName != null">
+      and p_category_name = #{pCategoryName,jdbcType=VARCHAR}
+    </if>
+    <if test="pName != null">
+      and p_name = #{pName,jdbcType=VARCHAR}
+    </if>
+    <if test="pDes != null">
+      and p_des = #{pDes,jdbcType=VARCHAR}
+    </if>
+    <if test="pProPicUrl != null">
+      and p_pro_pic_url = #{pProPicUrl,jdbcType=VARCHAR}
+    </if>
+    <if test="pPrice != null">
+      and p_price = #{pPrice,jdbcType=DECIMAL}
+    </if>
+    <if test="pTasteName != null">
+      and p_taste_name = #{pTasteName,jdbcType=VARCHAR}
+    </if>
+    <if test="pSizeName != null">
+      and p_size_name = #{pSizeName,jdbcType=VARCHAR}
+    </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -46,9 +71,13 @@
   </delete>
   <insert id="insert" parameterType="com.mike.resume.entity.CCard" useGeneratedKeys="true" keyProperty="id">
     insert into c_card (id, open_id, product_id, 
-      del_flag)
+      del_flag, p_category_name, p_name, p_des,
+    p_pro_pic_url, p_price, p_taste_name,
+    p_size_name)
     values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER},
-      #{delFlag,jdbcType=BIT})
+      #{delFlag,jdbcType=BIT}, #{pCategoryName,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pDes,jdbcType=VARCHAR},
+    #{pProPicUrl,jdbcType=VARCHAR}, #{pPrice,jdbcType=DECIMAL}, #{pTasteName,jdbcType=VARCHAR},
+    #{pSizeName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.mike.resume.entity.CCard" useGeneratedKeys="true" keyProperty="id">
     insert into c_card
@@ -65,6 +94,27 @@
       <if test="delFlag != null">
         del_flag,
       </if>
+      <if test="pCategoryName != null">
+        p_category_name,
+      </if>
+      <if test="pName != null">
+        p_name,
+      </if>
+      <if test="pDes != null">
+        p_des,
+      </if>
+      <if test="pProPicUrl != null">
+        p_pro_pic_url,
+      </if>
+      <if test="pPrice != null">
+        p_price,
+      </if>
+      <if test="pTasteName != null">
+        p_taste_name,
+      </if>
+      <if test="pSizeName != null">
+        p_size_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -78,6 +128,27 @@
       </if>
       <if test="delFlag != null">
         #{delFlag,jdbcType=BIT},
+      </if>
+      <if test="pCategoryName != null">
+        #{pCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null">
+        #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pDes != null">
+        #{pDes,jdbcType=VARCHAR},
+      </if>
+      <if test="pProPicUrl != null">
+        #{pProPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pPrice != null">
+        #{pPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pTasteName != null">
+        #{pTasteName,jdbcType=VARCHAR},
+      </if>
+      <if test="pSizeName != null">
+        #{pSizeName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -93,6 +164,27 @@
       <if test="delFlag != null">
         del_flag = #{delFlag,jdbcType=BIT},
       </if>
+      <if test="pCategoryName != null">
+        p_category_name = #{pCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="pName != null">
+        p_name = #{pName,jdbcType=VARCHAR},
+      </if>
+      <if test="pDes != null">
+        p_des = #{pDes,jdbcType=VARCHAR},
+      </if>
+      <if test="pProPicUrl != null">
+        p_pro_pic_url = #{pProPicUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="pPrice != null">
+        p_price = #{pPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="pTasteName != null">
+        p_taste_name = #{pTasteName,jdbcType=VARCHAR},
+      </if>
+      <if test="pSizeName != null">
+        p_size_name = #{pSizeName,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -100,7 +192,14 @@
     update c_card
     set open_id = #{openId,jdbcType=VARCHAR},
       product_id = #{productId,jdbcType=INTEGER},
-      del_flag = #{delFlag,jdbcType=BIT}
+      del_flag = #{delFlag,jdbcType=BIT},
+       p_category_name = #{pCategoryName,jdbcType=VARCHAR},
+      p_name = #{pName,jdbcType=VARCHAR},
+      p_des = #{pDes,jdbcType=VARCHAR},
+      p_pro_pic_url = #{pProPicUrl,jdbcType=VARCHAR},
+      p_price = #{pPrice,jdbcType=DECIMAL},
+      p_taste_name = #{pTasteName,jdbcType=VARCHAR},
+      p_size_name = #{pSizeName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
