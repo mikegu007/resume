@@ -78,10 +78,10 @@ public class COrderController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/upDateOrder", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    @RequestMapping(value = "/updateOrder", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public
     @ResponseBody
-    String upDateOrder(HttpServletRequest request, @RequestBody String json) {
+    String updateOrder(HttpServletRequest request, @RequestBody String json) {
         ResponseResult<COrder> result = new ResponseResult<>();
         if (StringUtil.isNotNull(json)) {
             JSONObject sUser = JSON.parseObject(json);
