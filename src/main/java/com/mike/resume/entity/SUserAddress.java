@@ -17,6 +17,10 @@ public class SUserAddress implements Serializable {
      */
     private String name;
     /**
+     * 区域
+     */
+    private String area;
+    /**
      * 地址
      */
     private String address;
@@ -75,5 +79,18 @@ public class SUserAddress implements Serializable {
 
     public void setPostcode(String postcode) {
         this.postcode = postcode == null ? null : postcode.trim();
+    }
+
+    /**
+     * 获取
+     *
+     * @return area
+     */
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 }
