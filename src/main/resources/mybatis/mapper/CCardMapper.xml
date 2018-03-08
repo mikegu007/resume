@@ -14,7 +14,6 @@
     id, open_id, product_id, del_flag
   </sql>
   <sql id="condition">
-    <where>
       <if test="id != null">
         and id = #{id,jdbcType=INTEGER}
       </if>
@@ -27,7 +26,6 @@
       <if test="delFlag != null">
         and del_flag = #{delFlag,jdbcType=BIT}
       </if>
-    </where>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

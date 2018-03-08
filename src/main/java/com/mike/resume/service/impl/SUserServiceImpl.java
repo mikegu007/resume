@@ -179,6 +179,7 @@ public class SUserServiceImpl {
         if (StringUtil.isNotNull(sUserToken)&&StringUtil.isNotNull(sUserToken.getOpenId())){
             SUserToken sUserTokenOld = sUserTokenMapper.selectByOpenId(sUserToken.getOpenId());
             if (StringUtil.isNotNull(sUserTokenOld)){
+                result.setContent(sUserTokenOld);
                 result.setCode(false);
                 result.setMsg("用户信息已存在，请勿重复添加！");
             }else {

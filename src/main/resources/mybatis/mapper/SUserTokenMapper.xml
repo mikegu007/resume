@@ -11,7 +11,6 @@
     id, open_id, create_time, salt
   </sql>
   <sql id="condition">
-    <where>
       <if test="id != null">
         and id = #{id,jdbcType=INTEGER}
       </if>
@@ -24,7 +23,6 @@
       <if test="salt != null">
         and salt = #{salt,jdbcType=VARCHAR}
       </if>
-    </where>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

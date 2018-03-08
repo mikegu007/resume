@@ -21,7 +21,6 @@
     enable, del_flag
   </sql>
   <sql id="condition">
-    <where>
       <if test="openId != null">
         and open_id = #{openId,jdbcType=VARCHAR}
       </if>
@@ -55,7 +54,6 @@
       <if test="delFlag != null">
         and del_flag = #{delFlag,jdbcType=BIT}
       </if>
-    </where>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

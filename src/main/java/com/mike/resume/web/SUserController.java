@@ -53,12 +53,12 @@ public class SUserController {
                     String errmsg = wxResultJobject.getString("errmsg");
                     String openid = wxResultJobject.getString("openid");
                     String session_key = wxResultJobject.getString("session_key");
-                    String unionid = wxResultJobject.getString("unionid");
-
+//                    String unionid = wxResultJobject.getString("unionid");
+//                      && StringUtil.isNotNull(unionid)
                     if (StringUtil.isNotNull(errcode) || StringUtil.isNotNull(errmsg)) {
                         result.setCode(false);
                         result.setMsg("调用wx接口错误时,错误编码：" + errcode + "&错误信息：" + errmsg);
-                    } else if (StringUtil.isNotNull(openid) && StringUtil.isNotNull(session_key) && StringUtil.isNotNull(unionid)) {
+                    } else if (StringUtil.isNotNull(openid) && StringUtil.isNotNull(session_key) ) {
                         SUserToken sUserToken = new SUserToken();
                         sUserToken.setOpenId(openid);
                         sUserToken.setCreateTime(new Date());
@@ -141,6 +141,41 @@ public class SUserController {
                 SUserAddress sUserAddress = new SUserAddress();
                 sUserAddress.setOpenId(openId);
                 result = sUserAddressService.selectSelective(sUserAddress);
+            }else {
+                result.setCode(false);
+                result.setMsg("参数不能为空");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("参数不能为空");
+        }
+        return JSON.toJSONString(result);
+    }
+
+    /**
+     * 获取用户地址
+     * @param request
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/isHasUserAddress", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public
+    @ResponseBody
+    String isHasUserAddress(HttpServletRequest request, @RequestBody String json) {
+        ResponseResult<SUserAddress> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(json)) {
+            JSONObject sUser = JSON.parseObject(json);
+            String openId = sUser.getString("openId");
+            if (StringUtil.isNotNull(openId)){
+                SUserAddress sUserAddress = new SUserAddress();
+                sUserAddress.setOpenId(openId);
+                ResponseResult<SUserAddress> sUserAddressResponseResult = sUserAddressService.selectSelective(sUserAddress);
+                if (sUserAddressResponseResult.getCode()&&StringUtil.isNotNull(sUserAddressResponseResult.getResult())){
+                    result.setCode(true);
+                }else {
+                    result.setCode(false);
+                }
+
             }else {
                 result.setCode(false);
                 result.setMsg("参数不能为空");
