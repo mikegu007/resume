@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2018-02-28 14:28:59
+Date: 2018-03-08 11:46:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,7 +20,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `c_card`;
 CREATE TABLE `c_card` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `open_id` varchar(50) DEFAULT NULL,
   `product_id` int(11) DEFAULT NULL,
   `del_flag` bit(1) DEFAULT b'0',
@@ -59,10 +59,16 @@ CREATE TABLE `c_order` (
 -- ----------------------------
 DROP TABLE IF EXISTS `c_order_detail`;
 CREATE TABLE `c_order_detail` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_no` varchar(255) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
   `del_flag` bit(1) DEFAULT b'0',
+  `p_category_name` varchar(255) DEFAULT NULL,
+  `p_name` varchar(255) DEFAULT NULL,
+  `p_des` varchar(255) DEFAULT NULL,
+  `p_pro_pic_url` varchar(255) DEFAULT NULL,
+  `p_price` decimal(40,0) DEFAULT NULL,
+  `p_taste_name` varchar(255) DEFAULT NULL,
+  `p_size_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -75,7 +81,7 @@ CREATE TABLE `c_order_detail` (
 -- ----------------------------
 DROP TABLE IF EXISTS `c_product`;
 CREATE TABLE `c_product` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `des` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
@@ -84,41 +90,51 @@ CREATE TABLE `c_product` (
   `enable` bit(1) DEFAULT b'1' COMMENT '是否启用',
   `del_flag` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of c_product
 -- ----------------------------
+INSERT INTO `c_product` VALUES ('1', 'test分类', 'test产品', 'test产品描述', null, '10', '', '\0');
+INSERT INTO `c_product` VALUES ('2', 'test分类2', 'test产品2', 'test产品描述2', null, '30', '', '\0');
 
 -- ----------------------------
 -- Table structure for c_product_size
 -- ----------------------------
 DROP TABLE IF EXISTS `c_product_size`;
 CREATE TABLE `c_product_size` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `c_product_id` int(11) DEFAULT NULL,
   `size_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_product_size
 -- ----------------------------
+INSERT INTO `c_product_size` VALUES ('1', '1', '大');
+INSERT INTO `c_product_size` VALUES ('2', '1', '小');
+INSERT INTO `c_product_size` VALUES ('3', '2', '中');
+INSERT INTO `c_product_size` VALUES ('4', '2', '小');
 
 -- ----------------------------
 -- Table structure for c_product_taste
 -- ----------------------------
 DROP TABLE IF EXISTS `c_product_taste`;
 CREATE TABLE `c_product_taste` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `c_product_id` int(11) DEFAULT NULL,
   `taste_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_product_taste
 -- ----------------------------
+INSERT INTO `c_product_taste` VALUES ('1', '1', '榴莲味');
+INSERT INTO `c_product_taste` VALUES ('2', '1', '芒果味');
+INSERT INTO `c_product_taste` VALUES ('3', '2', '草莓味');
+INSERT INTO `c_product_taste` VALUES ('4', '2', '少女味');
 
 -- ----------------------------
 -- Table structure for lottery
@@ -200,7 +216,7 @@ CREATE TABLE `s_user` (
 -- ----------------------------
 DROP TABLE IF EXISTS `s_user_address`;
 CREATE TABLE `s_user_address` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `open_id` varchar(50) NOT NULL,
   `name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -218,13 +234,14 @@ CREATE TABLE `s_user_address` (
 -- ----------------------------
 DROP TABLE IF EXISTS `s_user_token`;
 CREATE TABLE `s_user_token` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `open_id` varchar(50) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `salt` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of s_user_token
 -- ----------------------------
+INSERT INTO `s_user_token` VALUES ('1', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-08 10:43:50', '162037E4981');

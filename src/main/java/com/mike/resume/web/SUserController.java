@@ -194,14 +194,14 @@ public class SUserController {
      * @param json
      * @return
      */
-    @RequestMapping(value = "/saveUserAddress", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    @RequestMapping(value = "/saveUserAddress", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
     public
     @ResponseBody
     String saveUserAddress(HttpServletRequest request, @RequestBody String json) {
         ResponseResult<SUserAddress> result = new ResponseResult<>();
         if (StringUtil.isNotNull(json)) {
-            JSONObject sUser = JSON.parseObject(json);
-            SUserAddress sUserAddress = sUser.getObject("userAddress",SUserAddress.class);
+            SUserAddress sUserAddress = JSON.parseObject(json,SUserAddress.class);
+//            SUserAddress sUserAddress = sUser.getObject("userAddress",SUserAddress.class);
             if (StringUtil.isNotNull(sUserAddress)){
                 if (StringUtil.isNotNull(sUserAddress.getId())){
                     result = sUserAddressService.updateSUserAddress(sUserAddress);

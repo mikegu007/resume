@@ -73,5 +73,31 @@ public class COrderController {
         return JSON.toJSONString(result);
     }
 
+    /**
+     * @param request
+     * @param json
+     * @return
+     */
+    @RequestMapping(value = "/upDateOrder", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+    public
+    @ResponseBody
+    String upDateOrder(HttpServletRequest request, @RequestBody String json) {
+        ResponseResult<COrder> result = new ResponseResult<>();
+        if (StringUtil.isNotNull(json)) {
+            JSONObject sUser = JSON.parseObject(json);
+            COrder cOrder = sUser.getObject("order",COrder.class);
+            if (StringUtil.isNotNull(cOrder)&&StringUtil.isNotNull(cOrder.getOpenId())&&StringUtil.isNotNull(cOrder.getOrderNo())){
+                result = cOrderService.updateCOrder(cOrder);
+            }else {
+                result.setCode(false);
+                result.setMsg("参数不能为空");
+            }
+        } else {
+            result.setCode(false);
+            result.setMsg("参数不能为空");
+        }
+        return JSON.toJSONString(result);
+    }
+
 
 }
