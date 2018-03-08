@@ -45,26 +45,18 @@ public class CCardServiceImpl {
         logger.info("方法 insertCCard 开始");
         logger.debug("方法 insertCCard 开始,参数 cCard:" + JSON.toJSONString(cCard));
         ResponseResult<CCard> result = new ResponseResult<>();
-        if (StringUtil.isNotNull(cCard) && StringUtil.isNotNull(cCard.getId())) {
-            CCard cCardOld = cCardMapper.selectByPrimaryKey(cCard.getId());
-            if (StringUtil.isNotNull(cCardOld)) {
-                result.setCode(false);
-                result.setMsg("购物车已存在，请勿重复添加！");
+        if (StringUtil.isNotNull(cCard)) {
+            int flag = cCardMapper.insertSelective(cCard);
+            if (flag > 0) {
+                result.setCode(true);
+                result.setMsg("加入购物车成功！");
+                result.setContent(cCard);
             } else {
-                int flag = cCardMapper.insertSelective(cCard);
-                if (flag > 0) {
-                    result.setCode(true);
-                    result.setMsg("加入购物车成功！");
-                    result.setContent(cCard);
-                } else {
-                    result.setCode(false);
-                    result.setMsg("加入购物车失败！");
-                }
+                result.setCode(false);
+                result.setMsg("加入购物车失败！");
             }
-        } else {
-            result.setCode(false);
-            result.setMsg("数据有误，加入购物车失败！");
         }
+
         logger.debug("方法 insertCCard 结束，return:" + JSON.toJSONString(result));
         logger.info("方法 insertCCard 结束");
         return result;

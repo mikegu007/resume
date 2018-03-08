@@ -47,6 +47,11 @@ public class CCard implements Serializable {
      */
     private String pSizeName;
 
+//    /**
+//     * 产品数量
+//     */
+//    private Integer count;
+
 
     public Integer getId() {
         return id;
@@ -164,4 +169,17 @@ public class CCard implements Serializable {
     public void setpSizeName(String pSizeName) {
         this.pSizeName = pSizeName;
     }
+
+    /**
+     * 获取
+     *
+     * @return count
+     */
+//    public Integer getCount() {
+//        return count;
+//    }
+//
+//    public void setCount(Integer count) {
+//        this.count = count;
+//    }
 }
