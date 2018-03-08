@@ -14,7 +14,7 @@
     <result column="p_size_name" jdbcType="VARCHAR" property="pSizeName" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, open_id, product_id, del_flag, p_category_name, p_name, p_des, p_pro_pic_url, p_price, p_taste_name,
+    id, open_id, del_flag, p_category_name, p_name, p_des, p_pro_pic_url, p_price, p_taste_name,
     p_size_name
   </sql>
   <sql id="condition">
@@ -23,9 +23,6 @@
       </if>
       <if test="openId != null">
         and open_id = #{openId,jdbcType=VARCHAR}
-      </if>
-      <if test="productId != null">
-        and product_id = #{productId,jdbcType=INTEGER}
       </if>
       <if test="delFlag != null">
         and del_flag = #{delFlag,jdbcType=BIT}
@@ -70,11 +67,11 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mike.resume.entity.CCard" useGeneratedKeys="true" keyProperty="id">
-    insert into c_card (id, open_id, product_id, 
+    insert into c_card (id, open_id,
       del_flag, p_category_name, p_name, p_des,
     p_pro_pic_url, p_price, p_taste_name,
     p_size_name)
-    values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR}, #{productId,jdbcType=INTEGER},
+    values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR},
       #{delFlag,jdbcType=BIT}, #{pCategoryName,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pDes,jdbcType=VARCHAR},
     #{pProPicUrl,jdbcType=VARCHAR}, #{pPrice,jdbcType=DECIMAL}, #{pTasteName,jdbcType=VARCHAR},
     #{pSizeName,jdbcType=VARCHAR})
@@ -87,9 +84,6 @@
       </if>
       <if test="openId != null">
         open_id,
-      </if>
-      <if test="productId != null">
-        product_id,
       </if>
       <if test="delFlag != null">
         del_flag,
@@ -123,9 +117,6 @@
       <if test="openId != null">
         #{openId,jdbcType=VARCHAR},
       </if>
-      <if test="productId != null">
-        #{productId,jdbcType=INTEGER},
-      </if>
       <if test="delFlag != null">
         #{delFlag,jdbcType=BIT},
       </if>
@@ -158,9 +149,6 @@
       <if test="openId != null">
         open_id = #{openId,jdbcType=VARCHAR},
       </if>
-      <if test="productId != null">
-        product_id = #{productId,jdbcType=INTEGER},
-      </if>
       <if test="delFlag != null">
         del_flag = #{delFlag,jdbcType=BIT},
       </if>
@@ -191,7 +179,6 @@
   <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.CCard">
     update c_card
     set open_id = #{openId,jdbcType=VARCHAR},
-      product_id = #{productId,jdbcType=INTEGER},
       del_flag = #{delFlag,jdbcType=BIT},
        p_category_name = #{pCategoryName,jdbcType=VARCHAR},
       p_name = #{pName,jdbcType=VARCHAR},
