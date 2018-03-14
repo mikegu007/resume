@@ -1,7 +1,6 @@
 package com.mike.resume.web;
 
 import com.alibaba.fastjson.JSONObject;
-import com.mike.common.StringUtil;
 import com.mike.common.UtilEncode;
 import com.mike.resume.util.Tool;
 import org.apache.commons.lang3.StringUtils;
@@ -10,7 +9,7 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
-import org.springframework.web.util.WebUtils;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +24,7 @@ import java.util.*;
  * @author Mike
  * @date 2018/3/12
  */
+@Controller
 public class WXPayController {
 
     private static Logger logger = Logger.getLogger(WXPayController.class);
