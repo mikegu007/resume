@@ -54,6 +54,26 @@ public class COrder implements Serializable {
      * 删除标识
      */
     private Boolean delFlag;
+    /**
+     * 收件人
+     */
+    private String sendName;
+    /**
+     * 收件区域
+     */
+    private String sendArea;
+    /**
+     * s收件详情地址
+     */
+    private String sendAddress;
+    /**
+     * 收件人电话
+     */
+    private String sendTelephone;
+    /**
+     * 收件人邮编
+     */
+    private String sendPostcode;
 
     private List<COrderDetail> cOrderDetails;
 
@@ -151,5 +171,70 @@ public class COrder implements Serializable {
 
     public void setcOrderDetails(List<COrderDetail> cOrderDetails) {
         this.cOrderDetails = cOrderDetails;
+    }
+
+    /**
+     * 获取
+     *
+     * @return sendName
+     */
+    public String getSendName() {
+        return sendName;
+    }
+
+    public void setSendName(String sendName) {
+        this.sendName = sendName;
+    }
+
+    /**
+     * 获取
+     *
+     * @return sendArea
+     */
+    public String getSendArea() {
+        return sendArea;
+    }
+
+    public void setSendArea(String sendArea) {
+        this.sendArea = sendArea;
+    }
+
+    /**
+     * 获取
+     *
+     * @return sendAddress
+     */
+    public String getSendAddress() {
+        return sendAddress;
+    }
+
+    public void setSendAddress(String sendAddress) {
+        this.sendAddress = sendAddress;
+    }
+
+    /**
+     * 获取
+     *
+     * @return sendTelephone
+     */
+    public String getSendTelephone() {
+        return sendTelephone;
+    }
+
+    public void setSendTelephone(String sendTelephone) {
+        this.sendTelephone = sendTelephone;
+    }
+
+    /**
+     * 获取
+     *
+     * @return sendPostcode
+     */
+    public String getSendPostcode() {
+        return sendPostcode;
+    }
+
+    public void setSendPostcode(String sendPostcode) {
+        this.sendPostcode = sendPostcode;
     }
 }

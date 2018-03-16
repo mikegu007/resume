@@ -1,197 +1,266 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mike.resume.mapper.COrderMapper">
-  <resultMap id="BaseResultMap" type="com.mike.resume.entity.COrder">
-    <id column="order_no" jdbcType="VARCHAR" property="orderNo" />
-    <result column="open_id" jdbcType="VARCHAR" property="openId" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
-    <result column="amount_actual" jdbcType="DECIMAL" property="amountActual" />
-    <result column="amount" jdbcType="DECIMAL" property="amount" />
-    <result column="detail_count" jdbcType="INTEGER" property="detailCount" />
-    <result column="status" jdbcType="TINYINT" property="status" />
-    <result column="has_pay" jdbcType="BIT" property="hasPay" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-    <result column="del_flag" jdbcType="BIT" property="delFlag" />
-    <collection property="cOrderDetails" column="order_no"
-                select="com.mike.resume.mapper.COrderDetailMapper.selectByOrderNo" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.mike.resume.entity.COrder">
+        <id column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="amount_actual" jdbcType="DECIMAL" property="amountActual"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="detail_count" jdbcType="INTEGER" property="detailCount"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="has_pay" jdbcType="BIT" property="hasPay"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="send_name" jdbcType="VARCHAR" property="sendName"/>
+        <result column="send_area" jdbcType="VARCHAR" property="sendArea"/>
+        <result column="send_address" jdbcType="VARCHAR" property="sendAddress"/>
+        <result column="send_telephone" jdbcType="VARCHAR" property="sendTelephone"/>
+        <result column="send_postcode" jdbcType="VARCHAR" property="sendPostcode"/>
+
+
+        <collection property="cOrderDetails" column="order_no"
+                    select="com.mike.resume.mapper.COrderDetailMapper.selectByOrderNo"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     order_no, open_id, create_time, pay_time, amount_actual, amount, detail_count, status, 
-    has_pay, remark, del_flag
+    has_pay, remark, del_flag,send_name,send_area,send_address,send_telephone,send_postcode
   </sql>
-  <sql id="condition">
-      <if test="orderNo != null">
-        and order_no = #{orderNo,jdbcType=VARCHAR}
-      </if>
-      <if test="openId != null">
-        and open_id = #{openId,jdbcType=VARCHAR}
-      </if>
-      <if test="createTime != null">
-        and create_time = #{createTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="payTime != null">
-        and pay_time = #{payTime,jdbcType=TIMESTAMP}
-      </if>
-      <if test="amountActual != null">
-        and amount_actual = #{amountActual,jdbcType=DECIMAL}
-      </if>
-      <if test="amount != null">
-        and amount = #{amount,jdbcType=DECIMAL}
-      </if>
-      <if test="detailCount != null">
-        and detail_count = #{detailCount,jdbcType=INTEGER}
-      </if>
-      <if test="status != null">
-        and status = #{status,jdbcType=TINYINT}
-      </if>
-      <if test="hasPay != null">
-        and has_pay = #{hasPay,jdbcType=BIT}
-      </if>
-      <if test="remark != null">
-        and remark = #{remark,jdbcType=VARCHAR}
-      </if>
-      <if test="delFlag != null">
-        and del_flag = #{delFlag,jdbcType=BIT}
-      </if>
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from c_order
-    where order_no = #{orderNo,jdbcType=VARCHAR}
-  </select>
-  <select id="selectSelective" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from c_order
-    where 1=1
-    <include refid="condition" />
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <sql id="condition">
+        <if test="orderNo != null">
+            and order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="openId != null">
+            and open_id = #{openId,jdbcType=VARCHAR}
+        </if>
+        <if test="createTime != null">
+            and create_time = #{createTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="payTime != null">
+            and pay_time = #{payTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="amountActual != null">
+            and amount_actual = #{amountActual,jdbcType=DECIMAL}
+        </if>
+        <if test="amount != null">
+            and amount = #{amount,jdbcType=DECIMAL}
+        </if>
+        <if test="detailCount != null">
+            and detail_count = #{detailCount,jdbcType=INTEGER}
+        </if>
+        <if test="status != null">
+            and status = #{status,jdbcType=TINYINT}
+        </if>
+        <if test="hasPay != null">
+            and has_pay = #{hasPay,jdbcType=BIT}
+        </if>
+        <if test="remark != null">
+            and remark = #{remark,jdbcType=VARCHAR}
+        </if>
+        <if test="delFlag != null">
+            and del_flag = #{delFlag,jdbcType=BIT}
+        </if>
+        <if test="sendName != null">
+            and send_name = #{sendName,jdbcType=VARCHAR}
+        </if>
+        <if test="sendArea != null">
+            and send_area = #{sendArea,jdbcType=VARCHAR}
+        </if>
+        <if test="sendAddress != null">
+            and send_address = #{sendAddress,jdbcType=VARCHAR}
+        </if>
+        <if test="sendTelephone != null">
+            and send_telephone = #{sendTelephone,jdbcType=VARCHAR}
+        </if>
+        <if test="sendPostcode != null">
+            and send_postcode = #{sendPostcode,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from c_order
+        where order_no = #{orderNo,jdbcType=VARCHAR}
+    </select>
+    <select id="selectSelective" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from c_order
+        where 1=1
+        <include refid="condition"/>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from c_order
     where order_no = #{orderNo,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.mike.resume.entity.COrder" useGeneratedKeys="true" keyProperty="orderNo">
+    <insert id="insert" parameterType="com.mike.resume.entity.COrder" useGeneratedKeys="true" keyProperty="orderNo">
     insert into c_order (order_no, open_id, create_time, 
       pay_time, amount_actual, amount, 
       detail_count, status, has_pay, 
-      remark, del_flag)
+      remark, del_flag,send_area,send_address,send_telephone,send_postcode)
     values (#{orderNo,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{payTime,jdbcType=TIMESTAMP}, #{amountActual,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
       #{detailCount,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{hasPay,jdbcType=BIT}, 
-      #{remark,jdbcType=VARCHAR}, #{delFlag,jdbcType=BIT})
+      #{remark,jdbcType=VARCHAR}, #{delFlag,jdbcType=BIT},#{sendName,jdbcType=VARCHAR},#{sendArea,jdbcType=VARCHAR},#{sendAddress,jdbcType=VARCHAR},
+      #{sendTelephone,jdbcType=VARCHAR},#{sendPostcode,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.mike.resume.entity.COrder" useGeneratedKeys="true" keyProperty="orderNo">
-    insert into c_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="orderNo != null">
-        order_no,
-      </if>
-      <if test="openId != null">
-        open_id,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="payTime != null">
-        pay_time,
-      </if>
-      <if test="amountActual != null">
-        amount_actual,
-      </if>
-      <if test="amount != null">
-        amount,
-      </if>
-      <if test="detailCount != null">
-        detail_count,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="hasPay != null">
-        has_pay,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-      <if test="delFlag != null">
-        del_flag,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="orderNo != null">
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="openId != null">
-        #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payTime != null">
-        #{payTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="amountActual != null">
-        #{amountActual,jdbcType=DECIMAL},
-      </if>
-      <if test="amount != null">
-        #{amount,jdbcType=DECIMAL},
-      </if>
-      <if test="detailCount != null">
-        #{detailCount,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="hasPay != null">
-        #{hasPay,jdbcType=BIT},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="delFlag != null">
-        #{delFlag,jdbcType=BIT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mike.resume.entity.COrder">
-    update c_order
-    <set>
-      <if test="openId != null">
-        open_id = #{openId,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payTime != null">
-        pay_time = #{payTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="amountActual != null">
-        amount_actual = #{amountActual,jdbcType=DECIMAL},
-      </if>
-      <if test="amount != null">
-        amount = #{amount,jdbcType=DECIMAL},
-      </if>
-      <if test="detailCount != null">
-        detail_count = #{detailCount,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="hasPay != null">
-        has_pay = #{hasPay,jdbcType=BIT},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="delFlag != null">
-        del_flag = #{delFlag,jdbcType=BIT},
-      </if>
-    </set>
-    where order_no = #{orderNo,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.COrder">
+    <insert id="insertSelective" parameterType="com.mike.resume.entity.COrder" useGeneratedKeys="true"
+            keyProperty="orderNo">
+        insert into c_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="openId != null">
+                open_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="payTime != null">
+                pay_time,
+            </if>
+            <if test="amountActual != null">
+                amount_actual,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="detailCount != null">
+                detail_count,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="hasPay != null">
+                has_pay,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="sendName != null">
+                send_name ,
+            </if>
+            <if test="sendArea != null">
+                send_area,
+            </if>
+            <if test="sendAddress != null">
+                send_address,
+            </if>
+            <if test="sendTelephone != null">
+                send_telephone ,
+            </if>
+            <if test="sendPostcode != null">
+                send_postcode ,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="openId != null">
+                #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="amountActual != null">
+                #{amountActual,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="detailCount != null">
+                #{detailCount,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="hasPay != null">
+                #{hasPay,jdbcType=BIT},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="sendName != null">
+                #{sendName,jdbcType=VARCHAR},
+            </if>
+            <if test="sendArea != null">
+                #{sendArea,jdbcType=VARCHAR},
+            </if>
+            <if test="sendAddress != null">
+                #{sendAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTelephone != null">
+                #{sendTelephone,jdbcType=VARCHAR},
+            </if>
+            <if test="sendPostcode != null">
+                #{sendPostcode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mike.resume.entity.COrder">
+        update c_order
+        <set>
+            <if test="openId != null">
+                open_id = #{openId,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                pay_time = #{payTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="amountActual != null">
+                amount_actual = #{amountActual,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="detailCount != null">
+                detail_count = #{detailCount,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="hasPay != null">
+                has_pay = #{hasPay,jdbcType=BIT},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="sendName != null">
+                send_name = #{sendName,jdbcType=VARCHAR},
+            </if>
+            <if test="sendArea != null">
+                send_area = #{sendArea,jdbcType=VARCHAR},
+            </if>
+            <if test="sendAddress != null">
+                send_address = #{sendAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="sendTelephone != null">
+                send_telephone = #{sendTelephone,jdbcType=VARCHAR},
+            </if>
+            <if test="sendPostcode != null">
+                send_postcode = #{sendPostcode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where order_no = #{orderNo,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.COrder">
     update c_order
     set open_id = #{openId,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -203,6 +272,11 @@
       has_pay = #{hasPay,jdbcType=BIT},
       remark = #{remark,jdbcType=VARCHAR},
       del_flag = #{delFlag,jdbcType=BIT}
+      send_name = #{sendName,jdbcType=VARCHAR},
+      send_area = #{sendArea,jdbcType=VARCHAR},
+      send_address = #{sendAddress,jdbcType=VARCHAR},
+      send_telephone = #{sendTelephone,jdbcType=VARCHAR},
+      send_postcode = #{sendPostcode,jdbcType=VARCHAR}
     where order_no = #{orderNo,jdbcType=VARCHAR}
   </update>
 </mapper>

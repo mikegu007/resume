@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2018-03-08 16:42:09
+Date: 2018-03-16 15:26:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,11 +31,13 @@ CREATE TABLE `c_card` (
   `p_taste_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   `p_size_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of c_card
 -- ----------------------------
+INSERT INTO `c_card` VALUES ('33', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '芒果味', '小');
+INSERT INTO `c_card` VALUES ('34', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '榴莲味', '小');
 
 -- ----------------------------
 -- Table structure for c_order
@@ -53,6 +55,11 @@ CREATE TABLE `c_order` (
   `has_pay` bit(1) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   `del_flag` bit(1) DEFAULT b'0',
+  `send_name` varchar(255) NOT NULL COMMENT '收件人',
+  `send_area` varchar(255) DEFAULT NULL COMMENT '收件区域',
+  `send_address` longtext NOT NULL COMMENT 's收件详情地址',
+  `send_telephone` varchar(255) NOT NULL COMMENT '收件人电话',
+  `send_postcode` varchar(255) NOT NULL COMMENT '收件人邮编',
   PRIMARY KEY (`order_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -230,14 +237,13 @@ CREATE TABLE `s_user_address` (
   `telephone` varchar(255) CHARACTER SET utf8 NOT NULL,
   `postcode` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '邮编',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of s_user_address
 -- ----------------------------
-INSERT INTO `s_user_address` VALUES ('39', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', 'sad', '', 'sddddddddddddddddddddd', 'asd', 'asd');
-INSERT INTO `s_user_address` VALUES ('40', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', 'sd', '上海市宝山区密山路5号宝山区纪检委(君子兰路南)', '2323', 'sad', '2132');
-INSERT INTO `s_user_address` VALUES ('42', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '樊', '上海市宝山区密山路5号宝山区政府', '213123', '18335831325', '123123');
+INSERT INTO `s_user_address` VALUES ('47', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '樊樊樊樊', '上海市宝山区友谊路友谊路', '奥术大师大asfdasdsadsaddasd', '123213213', '2312321');
+INSERT INTO `s_user_address` VALUES ('48', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '樊旭清', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '12楼', '18335831325', '285852555');
 
 -- ----------------------------
 -- Table structure for s_user_token
