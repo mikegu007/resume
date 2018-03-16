@@ -1,3 +1,4 @@
 远程密码：505040
 账号：root
 密码：Guweifeng0
+启动程序命令:java -jar resume.jar >log/log.file

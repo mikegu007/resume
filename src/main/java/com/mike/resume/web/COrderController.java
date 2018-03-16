@@ -7,10 +7,8 @@ import com.mike.common.StringUtil;
 import com.mike.resume.entity.CCard;
 import com.mike.resume.entity.COrder;
 import com.mike.resume.entity.COrderDetail;
-import com.mike.resume.entity.CProduct;
 import com.mike.resume.service.impl.CCardServiceImpl;
 import com.mike.resume.service.impl.COrderServiceImpl;
-import com.mike.resume.service.impl.CProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -111,6 +109,13 @@ public class COrderController {
                     cOrder.setcOrderDetails(cOrderDetails);
                     cOrder.setDetailCount(cOrderDetails.size());
                     result = cOrderService.insertCOrder(cOrder);
+                    //生成订单成功，删除购物车
+                    if (result.getCode()){
+                        ResponseResult<CCard> cCardResponseResult1 = cCardService.deleteByPrimaryKey(id);
+//                        if (cCardResponseResult1.getCode()){
+//
+//                        }
+                    }
                 }else {
                     result.setCode(false);
                     result.setMsg("未查询到该购物车");
