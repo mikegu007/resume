@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2018-03-16 15:26:50
+Date: 2018-03-16 15:29:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,17 +21,17 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `c_card`;
 CREATE TABLE `c_card` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `open_id` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
+  `open_id` varchar(50) DEFAULT NULL,
   `del_flag` bit(1) DEFAULT b'0',
-  `p_category_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `p_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `p_des` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `p_pro_pic_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `p_category_name` varchar(255) DEFAULT NULL,
+  `p_name` varchar(255) DEFAULT NULL,
+  `p_des` varchar(255) DEFAULT NULL,
+  `p_pro_pic_url` varchar(255) DEFAULT NULL,
   `p_price` decimal(40,0) DEFAULT NULL,
-  `p_taste_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `p_size_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `p_taste_name` varchar(255) DEFAULT NULL,
+  `p_size_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_card
@@ -95,15 +95,15 @@ CREATE TABLE `c_order_detail` (
 DROP TABLE IF EXISTS `c_product`;
 CREATE TABLE `c_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `category_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `des` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `pro_pic_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `category_name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `des` varchar(255) DEFAULT NULL,
+  `pro_pic_url` varchar(255) DEFAULT NULL,
   `price` decimal(40,0) DEFAULT NULL,
   `enable` bit(1) DEFAULT b'1' COMMENT '是否启用',
   `del_flag` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_product
@@ -230,14 +230,14 @@ CREATE TABLE `s_user` (
 DROP TABLE IF EXISTS `s_user_address`;
 CREATE TABLE `s_user_address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `open_id` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `area` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '区域',
-  `address` longtext CHARACTER SET utf8 NOT NULL,
-  `telephone` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `postcode` varchar(255) CHARACTER SET utf8 NOT NULL COMMENT '邮编',
+  `open_id` varchar(50) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `area` varchar(255) DEFAULT NULL COMMENT '区域',
+  `address` longtext NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `postcode` varchar(255) NOT NULL COMMENT '邮编',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of s_user_address

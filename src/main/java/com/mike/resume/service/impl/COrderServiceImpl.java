@@ -54,7 +54,7 @@ public class COrderServiceImpl {
         logger.debug("方法 insertCOrder 开始,参数 cOrder:" + JSON.toJSONString(cOrder));
         ResponseResult<COrder> result = new ResponseResult<>();
 
-        if (StringUtil.isNotNull(cOrder) && StringUtil.isNotNull(cOrder.getOpenId()) && (cOrder.getcOrderDetails().size() > 0)) {
+        if (StringUtil.isNotNull(cOrder) && StringUtil.isNotNull(cOrder.getOpenId()) && (cOrder.getDetailCount() > 0)) {
             String orderNo;
             //生成的code数据库中不重复
             do {

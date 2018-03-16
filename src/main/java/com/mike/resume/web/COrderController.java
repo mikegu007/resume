@@ -65,7 +65,8 @@ public class COrderController {
         ResponseResult<COrder> result = new ResponseResult<>();
         if (StringUtil.isNotNull(json)) {
             COrder cOrder = JSON.parseObject(json,COrder.class);
-            if (StringUtil.isNotNull(cOrder)&&StringUtil.isNotNull(cOrder.getOpenId())){
+            if (StringUtil.isNotNull(cOrder)&&StringUtil.isNotNull(cOrder.getOpenId())&&StringUtil.isNotNull(cOrder.getcOrderDetails())){
+                cOrder.setDetailCount(cOrder.getcOrderDetails().size());
                 result = cOrderService.insertCOrder(cOrder);
             }else {
                 result.setCode(false);
@@ -91,7 +92,8 @@ public class COrderController {
         if (StringUtil.isNotNull(json)) {
             JSONObject jsonObject = JSON.parseObject(json);
             Integer id = jsonObject.getInteger("id");
-            if (StringUtil.isNotNull(id)){
+            COrder cOrder = jsonObject.getObject("cOrder",COrder.class);
+            if (StringUtil.isNotNull(id)&&StringUtil.isNotNull(cOrder)){
                 ResponseResult<CCard> cCardResponseResult = cCardService.selCCardById(id);
                 if (cCardResponseResult.getCode()&&StringUtil.isNotNull(cCardResponseResult.getContent())){
                     CCard cCard = cCardResponseResult.getContent();
@@ -105,7 +107,6 @@ public class COrderController {
                     cOrderDetail.setpSizeName(cCard.getpSizeName());
                     cOrderDetail.setpTasteName(cCard.getpTasteName());
                     cOrderDetails.add(cOrderDetail);
-                    COrder cOrder = new COrder();
                     cOrder.setcOrderDetails(cOrderDetails);
                     cOrder.setDetailCount(cOrderDetails.size());
                     result = cOrderService.insertCOrder(cOrder);
