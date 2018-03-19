@@ -57,12 +57,7 @@ public class COrderServiceImpl {
         if (StringUtil.isNotNull(cOrder) && StringUtil.isNotNull(cOrder.getOpenId()) && (cOrder.getDetailCount() > 0)) {
             String orderNo;
             //生成的code数据库中不重复
-            do {
-                orderNo = UtilGenerateID.generateID("") + cOrder.getOpenId();
-            }
-            while ((!StringUtil.isNotNull(cOrderMapper.selectByPrimaryKey(orderNo))));
-
-
+            orderNo = UtilGenerateID.generateID("") + cOrder.getOpenId();
             //插入订单明细
             for (COrderDetail c :cOrder.getcOrderDetails()) {
                 c.setOrderNo(orderNo);
