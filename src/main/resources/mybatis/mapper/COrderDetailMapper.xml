@@ -17,7 +17,7 @@
     </resultMap>
     <sql id="Base_Column_List">
     id, order_no, del_flag, p_category_name, p_name, p_des, p_pro_pic_url, p_price, p_taste_name,
-    p_size_name,count
+    p_size_name,p_count
   </sql>
     <sql id="condition">
         <if test="id != null">

@@ -22,7 +22,7 @@ public class CCard implements Serializable {
      * 产品分类名
      */
     private String pCategoryName;
-    /**
+    /**-
      * 产品名
      */
     private String pName;
