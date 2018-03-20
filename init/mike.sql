@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2018-03-06 19:00:27
+Date: 2018-03-20 17:46:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,16 +20,24 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `c_card`;
 CREATE TABLE `c_card` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `open_id` varchar(50) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
   `del_flag` bit(1) DEFAULT b'0',
+  `p_category_name` varchar(255) DEFAULT NULL,
+  `p_name` varchar(255) DEFAULT NULL,
+  `p_des` varchar(255) DEFAULT NULL,
+  `p_pro_pic_url` varchar(255) DEFAULT NULL,
+  `p_price` decimal(40,0) DEFAULT NULL,
+  `p_taste_name` varchar(255) DEFAULT NULL,
+  `p_size_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_card
 -- ----------------------------
+INSERT INTO `c_card` VALUES ('33', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '芒果味', '小');
+INSERT INTO `c_card` VALUES ('34', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '榴莲味', '小');
 
 -- ----------------------------
 -- Table structure for c_order
@@ -47,83 +55,114 @@ CREATE TABLE `c_order` (
   `has_pay` bit(1) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL,
   `del_flag` bit(1) DEFAULT b'0',
+  `send_name` varchar(255) NOT NULL COMMENT '收件人',
+  `send_area` varchar(255) DEFAULT NULL COMMENT '收件区域',
+  `send_address` longtext NOT NULL COMMENT 's收件详情地址',
+  `send_telephone` varchar(255) NOT NULL COMMENT '收件人电话',
+  `send_postcode` varchar(255) NOT NULL COMMENT '收件人邮编',
   PRIMARY KEY (`order_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_order
 -- ----------------------------
+INSERT INTO `c_order` VALUES ('162422225A0', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 14:39:16', null, '10', '10', '1', '1', '\0', '', '\0', '饭了啊', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '上安心', '45585855', '5858');
+INSERT INTO `c_order` VALUES ('16242230C7E', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 14:40:16', null, '30', '30', '1', '1', '\0', '', '\0', '樊旭清', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '12楼', '18335831325', '285852555');
+INSERT INTO `c_order` VALUES ('162422B61AF', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 14:49:22', null, '30', '30', '1', '1', '\0', '', '\0', '饭了啊', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '上安心', '45585855', '5858');
+INSERT INTO `c_order` VALUES ('162423373E0', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 14:58:11', null, '10', '10', '1', '1', '\0', '', '\0', '樊旭清', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '12楼', '18335831325', '285852555');
+INSERT INTO `c_order` VALUES ('1624236ACC7', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 15:01:42', null, '10', '10', '1', '1', '\0', '', '\0', '樊旭清', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '12楼', '18335831325', '285852555');
+INSERT INTO `c_order` VALUES ('16242378BDF', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 15:02:39', null, '60', '60', '1', '1', '\0', '', '\0', '樊樊樊樊', '上海市宝山区友谊路友谊路', '奥术大师大asfdasdsadsaddasd', '123213213', '2312321');
+INSERT INTO `c_order` VALUES ('162423B641F', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 15:06:51', null, '30', '30', '1', '1', '\0', '', '\0', '樊旭清', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '12楼', '18335831325', '285852555');
 
 -- ----------------------------
 -- Table structure for c_order_detail
 -- ----------------------------
 DROP TABLE IF EXISTS `c_order_detail`;
 CREATE TABLE `c_order_detail` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_no` varchar(255) DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
   `del_flag` bit(1) DEFAULT b'0',
+  `p_category_name` varchar(255) DEFAULT NULL,
+  `p_name` varchar(255) DEFAULT NULL,
+  `p_des` varchar(255) DEFAULT NULL,
+  `p_pro_pic_url` varchar(255) DEFAULT NULL,
+  `p_price` decimal(40,0) DEFAULT NULL,
+  `p_taste_name` varchar(255) DEFAULT NULL,
+  `p_size_name` varchar(255) DEFAULT NULL,
+  `p_count` int(10) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_order_detail
 -- ----------------------------
+INSERT INTO `c_order_detail` VALUES ('23', '162422225A0', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '芒果味', '小', null);
+INSERT INTO `c_order_detail` VALUES ('24', '16242230C7E', '\0', 'test分类2', 'test产品2', 'test产品描述2', null, '30', '草莓味', '小', null);
+INSERT INTO `c_order_detail` VALUES ('25', '162422B61AF', '\0', 'test分类2', 'test产品2', 'test产品描述2', null, '30', '草莓味', '中', null);
+INSERT INTO `c_order_detail` VALUES ('26', '162423373E0', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '榴莲味', '大', null);
+INSERT INTO `c_order_detail` VALUES ('27', '1624236ACC7', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '榴莲味', '小', null);
+INSERT INTO `c_order_detail` VALUES ('28', '16242378BDF', '\0', 'test分类2', 'test产品2', 'test产品描述2', null, '30', '少女味', '小', null);
+INSERT INTO `c_order_detail` VALUES ('29', '162423B641F', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '芒果味', '大', null);
 
 -- ----------------------------
 -- Table structure for c_product
 -- ----------------------------
 DROP TABLE IF EXISTS `c_product`;
 CREATE TABLE `c_product` (
-  `id` int(11) NOT NULL,
-  `category_name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `name` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `des` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
-  `pro_pic_url` varchar(255) CHARACTER SET utf8 DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `des` varchar(255) DEFAULT NULL,
+  `pro_pic_url` varchar(255) DEFAULT NULL,
   `price` decimal(40,0) DEFAULT NULL,
   `enable` bit(1) DEFAULT b'1' COMMENT '是否启用',
   `del_flag` bit(1) DEFAULT b'0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_product
 -- ----------------------------
 INSERT INTO `c_product` VALUES ('1', 'test分类', 'test产品', 'test产品描述', null, '10', '', '\0');
+INSERT INTO `c_product` VALUES ('2', 'test分类2', 'test产品2', 'test产品描述2', null, '30', '', '\0');
 
 -- ----------------------------
 -- Table structure for c_product_size
 -- ----------------------------
 DROP TABLE IF EXISTS `c_product_size`;
 CREATE TABLE `c_product_size` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `c_product_id` int(11) DEFAULT NULL,
   `size_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_product_size
 -- ----------------------------
 INSERT INTO `c_product_size` VALUES ('1', '1', '大');
 INSERT INTO `c_product_size` VALUES ('2', '1', '小');
+INSERT INTO `c_product_size` VALUES ('3', '2', '中');
+INSERT INTO `c_product_size` VALUES ('4', '2', '小');
 
 -- ----------------------------
 -- Table structure for c_product_taste
 -- ----------------------------
 DROP TABLE IF EXISTS `c_product_taste`;
 CREATE TABLE `c_product_taste` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `c_product_id` int(11) DEFAULT NULL,
   `taste_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_product_taste
 -- ----------------------------
 INSERT INTO `c_product_taste` VALUES ('1', '1', '榴莲味');
 INSERT INTO `c_product_taste` VALUES ('2', '1', '芒果味');
+INSERT INTO `c_product_taste` VALUES ('3', '2', '草莓味');
+INSERT INTO `c_product_taste` VALUES ('4', '2', '少女味');
 
 -- ----------------------------
 -- Table structure for lottery
@@ -205,31 +244,36 @@ CREATE TABLE `s_user` (
 -- ----------------------------
 DROP TABLE IF EXISTS `s_user_address`;
 CREATE TABLE `s_user_address` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `open_id` varchar(50) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
+  `area` varchar(255) DEFAULT NULL COMMENT '区域',
+  `address` longtext NOT NULL,
   `telephone` varchar(255) NOT NULL,
   `postcode` varchar(255) NOT NULL COMMENT '邮编',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of s_user_address
 -- ----------------------------
+INSERT INTO `s_user_address` VALUES ('47', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '樊樊樊樊', '上海市宝山区友谊路友谊路', '奥术大师大asfdasdsadsaddasd', '123213213', '2312321');
+INSERT INTO `s_user_address` VALUES ('48', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '樊旭清', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '12楼', '18335831325', '285852555');
+INSERT INTO `s_user_address` VALUES ('49', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '饭了啊', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '上安心', '45585855', '5858');
 
 -- ----------------------------
 -- Table structure for s_user_token
 -- ----------------------------
 DROP TABLE IF EXISTS `s_user_token`;
 CREATE TABLE `s_user_token` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `open_id` varchar(50) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `salt` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of s_user_token
 -- ----------------------------
+INSERT INTO `s_user_token` VALUES ('1', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-08 10:43:50', '162037E4981');

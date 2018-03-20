@@ -1,8 +1,9 @@
 package com.mike.resume.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class COrderDetail {
+public class COrderDetail implements Serializable {
     private Integer id;
     /**
      * 订单号
@@ -40,6 +41,10 @@ public class COrderDetail {
      * 产品规格名
      */
     private String pSizeName;
+    /**
+     * 数量
+     */
+    private Integer pCount;
 
     public Integer getId() {
         return id;
@@ -119,5 +124,19 @@ public class COrderDetail {
 
     public void setpSizeName(String pSizeName) {
         this.pSizeName = pSizeName == null ? null : pSizeName.trim();
+    }
+
+
+    /**
+     * 获取
+     *
+     * @return pCount
+     */
+    public Integer getpCount() {
+        return pCount;
+    }
+
+    public void setpCount(Integer pCount) {
+        this.pCount = pCount;
     }
 }

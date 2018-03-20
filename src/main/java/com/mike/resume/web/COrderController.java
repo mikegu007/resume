@@ -38,8 +38,8 @@ public class COrderController {
     String getOrders(HttpServletRequest request, @RequestBody String json) {
         ResponseResult<COrder> result = new ResponseResult<>();
         if (StringUtil.isNotNull(json)) {
-            JSONObject sUser = JSON.parseObject(json);
-            COrder cOrder = sUser.getObject("order",COrder.class);
+//            JSONObject sUser = JSON.parseObject(json);
+            COrder cOrder = JSON.parseObject(json,COrder.class);
             if (StringUtil.isNotNull(cOrder)&&StringUtil.isNotNull(cOrder.getOpenId())){
                 result = cOrderService.selectSelective(cOrder);
             }else {

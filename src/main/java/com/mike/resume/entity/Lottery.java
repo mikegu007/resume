@@ -1,8 +1,9 @@
 package com.mike.resume.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lottery {
+public class Lottery  implements Serializable {
     private Integer id;
 
     private String period;

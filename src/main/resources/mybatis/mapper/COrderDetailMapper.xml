@@ -1,188 +1,203 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mike.resume.mapper.COrderDetailMapper">
-  <resultMap id="BaseResultMap" type="com.mike.resume.entity.COrderDetail">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
-    <result column="del_flag" jdbcType="BIT" property="delFlag" />
-    <result column="p_category_name" jdbcType="VARCHAR" property="pCategoryName" />
-    <result column="p_name" jdbcType="VARCHAR" property="pName" />
-    <result column="p_des" jdbcType="VARCHAR" property="pDes" />
-    <result column="p_pro_pic_url" jdbcType="VARCHAR" property="pProPicUrl" />
-    <result column="p_price" jdbcType="DECIMAL" property="pPrice" />
-    <result column="p_taste_name" jdbcType="VARCHAR" property="pTasteName" />
-    <result column="p_size_name" jdbcType="VARCHAR" property="pSizeName" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="com.mike.resume.entity.COrderDetail">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="order_no" jdbcType="VARCHAR" property="orderNo"/>
+        <result column="del_flag" jdbcType="BIT" property="delFlag"/>
+        <result column="p_category_name" jdbcType="VARCHAR" property="pCategoryName"/>
+        <result column="p_name" jdbcType="VARCHAR" property="pName"/>
+        <result column="p_des" jdbcType="VARCHAR" property="pDes"/>
+        <result column="p_pro_pic_url" jdbcType="VARCHAR" property="pProPicUrl"/>
+        <result column="p_price" jdbcType="DECIMAL" property="pPrice"/>
+        <result column="p_taste_name" jdbcType="VARCHAR" property="pTasteName"/>
+        <result column="p_size_name" jdbcType="VARCHAR" property="pSizeName"/>
+        <result column="p_count" jdbcType="INTEGER" property="pCount"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
     id, order_no, del_flag, p_category_name, p_name, p_des, p_pro_pic_url, p_price, p_taste_name,
-    p_size_name
+    p_size_name,count
   </sql>
-  <sql id="condition">
-      <if test="id != null">
-        and id = #{id,jdbcType=INTEGER}
-      </if>
-      <if test="orderNo != null">
-        and order_no = #{orderNo,jdbcType=VARCHAR}
-      </if>
-      <if test="delFlag != null">
-        and del_flag = #{delFlag,jdbcType=BIT}
-      </if>
-      <if test="pCategoryName != null">
-        and p_category_name = #{pCategoryName,jdbcType=VARCHAR}
-      </if>
-      <if test="pName != null">
-        and p_name = #{pName,jdbcType=VARCHAR}
-      </if>
-      <if test="pDes != null">
-        and p_des = #{pDes,jdbcType=VARCHAR}
-      </if>
-      <if test="pProPicUrl != null">
-        and p_pro_pic_url = #{pProPicUrl,jdbcType=VARCHAR}
-      </if>
-      <if test="pPrice != null">
-        and p_price = #{pPrice,jdbcType=DECIMAL}
-      </if>
-      <if test="pTasteName != null">
-        and p_taste_name = #{pTasteName,jdbcType=VARCHAR}
-      </if>
-      <if test="pSizeName != null">
-        and p_size_name = #{pSizeName,jdbcType=VARCHAR}
-      </if>
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from c_order_detail
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectByOrderNo" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List" />
-    from c_order_detail
-    where order_no = #{orderNo,jdbcType=VARCHAR}
-  </select>
-  <select id="selectSelective" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from c_order_detail
-    where 1=1
-    <include refid="condition" />
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <sql id="condition">
+        <if test="id != null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="orderNo != null">
+            and order_no = #{orderNo,jdbcType=VARCHAR}
+        </if>
+        <if test="delFlag != null">
+            and del_flag = #{delFlag,jdbcType=BIT}
+        </if>
+        <if test="pCategoryName != null">
+            and p_category_name = #{pCategoryName,jdbcType=VARCHAR}
+        </if>
+        <if test="pName != null">
+            and p_name = #{pName,jdbcType=VARCHAR}
+        </if>
+        <if test="pDes != null">
+            and p_des = #{pDes,jdbcType=VARCHAR}
+        </if>
+        <if test="pProPicUrl != null">
+            and p_pro_pic_url = #{pProPicUrl,jdbcType=VARCHAR}
+        </if>
+        <if test="pPrice != null">
+            and p_price = #{pPrice,jdbcType=DECIMAL}
+        </if>
+        <if test="pTasteName != null">
+            and p_taste_name = #{pTasteName,jdbcType=VARCHAR}
+        </if>
+        <if test="pSizeName != null">
+            and p_size_name = #{pSizeName,jdbcType=VARCHAR}
+        </if>
+        <if test="pCount != null">
+            and p_count = #{pCount,jdbcType=INTEGER}
+        </if>
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from c_order_detail
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByOrderNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from c_order_detail
+        where order_no = #{orderNo,jdbcType=VARCHAR}
+    </select>
+    <select id="selectSelective" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from c_order_detail
+        where 1=1
+        <include refid="condition"/>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from c_order_detail
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.mike.resume.entity.COrderDetail" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.mike.resume.entity.COrderDetail" useGeneratedKeys="true" keyProperty="id">
     insert into c_order_detail (id, order_no, del_flag,
     p_category_name, p_name, p_des,
     p_pro_pic_url, p_price, p_taste_name,
-    p_size_name)
+    p_size_name,p_count)
     values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{delFlag,jdbcType=BIT},
     #{pCategoryName,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pDes,jdbcType=VARCHAR},
     #{pProPicUrl,jdbcType=VARCHAR}, #{pPrice,jdbcType=DECIMAL}, #{pTasteName,jdbcType=VARCHAR},
-    #{pSizeName,jdbcType=VARCHAR})
+    #{pSizeName,jdbcType=VARCHAR},#{pCount,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.mike.resume.entity.COrderDetail" useGeneratedKeys="true" keyProperty="id">
-    insert into c_order_detail
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="orderNo != null">
-        order_no,
-      </if>
-      <if test="delFlag != null">
-        del_flag,
-      </if>
-      <if test="pCategoryName != null">
-        p_category_name,
-      </if>
-      <if test="pName != null">
-        p_name,
-      </if>
-      <if test="pDes != null">
-        p_des,
-      </if>
-      <if test="pProPicUrl != null">
-        p_pro_pic_url,
-      </if>
-      <if test="pPrice != null">
-        p_price,
-      </if>
-      <if test="pTasteName != null">
-        p_taste_name,
-      </if>
-      <if test="pSizeName != null">
-        p_size_name,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="orderNo != null">
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="delFlag != null">
-        #{delFlag,jdbcType=BIT},
-      </if>
-      <if test="pCategoryName != null">
-        #{pCategoryName,jdbcType=VARCHAR},
-      </if>
-      <if test="pName != null">
-        #{pName,jdbcType=VARCHAR},
-      </if>
-      <if test="pDes != null">
-        #{pDes,jdbcType=VARCHAR},
-      </if>
-      <if test="pProPicUrl != null">
-        #{pProPicUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="pPrice != null">
-        #{pPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="pTasteName != null">
-        #{pTasteName,jdbcType=VARCHAR},
-      </if>
-      <if test="pSizeName != null">
-        #{pSizeName,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.mike.resume.entity.COrderDetail">
-    update c_order_detail
-    <set>
-      <if test="orderNo != null">
-        order_no = #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="delFlag != null">
-        del_flag = #{delFlag,jdbcType=BIT},
-      </if>
-      <if test="pCategoryName != null">
-        p_category_name = #{pCategoryName,jdbcType=VARCHAR},
-      </if>
-      <if test="pName != null">
-        p_name = #{pName,jdbcType=VARCHAR},
-      </if>
-      <if test="pDes != null">
-        p_des = #{pDes,jdbcType=VARCHAR},
-      </if>
-      <if test="pProPicUrl != null">
-        p_pro_pic_url = #{pProPicUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="pPrice != null">
-        p_price = #{pPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="pTasteName != null">
-        p_taste_name = #{pTasteName,jdbcType=VARCHAR},
-      </if>
-      <if test="pSizeName != null">
-        p_size_name = #{pSizeName,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.COrderDetail">
+    <insert id="insertSelective" parameterType="com.mike.resume.entity.COrderDetail" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into c_order_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="delFlag != null">
+                del_flag,
+            </if>
+            <if test="pCategoryName != null">
+                p_category_name,
+            </if>
+            <if test="pName != null">
+                p_name,
+            </if>
+            <if test="pDes != null">
+                p_des,
+            </if>
+            <if test="pProPicUrl != null">
+                p_pro_pic_url,
+            </if>
+            <if test="pPrice != null">
+                p_price,
+            </if>
+            <if test="pTasteName != null">
+                p_taste_name,
+            </if>
+            <if test="pSizeName != null">
+                p_size_name,
+            </if>
+            <if test="pCount != null">
+                p_count,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="pCategoryName != null">
+                #{pCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="pName != null">
+                #{pName,jdbcType=VARCHAR},
+            </if>
+            <if test="pDes != null">
+                #{pDes,jdbcType=VARCHAR},
+            </if>
+            <if test="pProPicUrl != null">
+                #{pProPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="pPrice != null">
+                #{pPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="pTasteName != null">
+                #{pTasteName,jdbcType=VARCHAR},
+            </if>
+            <if test="pSizeName != null">
+                #{pSizeName,jdbcType=VARCHAR},
+            </if>
+            <if test="pCount != null">
+                #{pCount,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mike.resume.entity.COrderDetail">
+        update c_order_detail
+        <set>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="delFlag != null">
+                del_flag = #{delFlag,jdbcType=BIT},
+            </if>
+            <if test="pCategoryName != null">
+                p_category_name = #{pCategoryName,jdbcType=VARCHAR},
+            </if>
+            <if test="pName != null">
+                p_name = #{pName,jdbcType=VARCHAR},
+            </if>
+            <if test="pDes != null">
+                p_des = #{pDes,jdbcType=VARCHAR},
+            </if>
+            <if test="pProPicUrl != null">
+                p_pro_pic_url = #{pProPicUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="pPrice != null">
+                p_price = #{pPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="pTasteName != null">
+                p_taste_name = #{pTasteName,jdbcType=VARCHAR},
+            </if>
+            <if test="pSizeName != null">
+                p_size_name = #{pSizeName,jdbcType=VARCHAR},
+            </if>
+            <if test="pCount != null">
+                p_count = #{pCount,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mike.resume.entity.COrderDetail">
     update c_order_detail
     set order_no = #{orderNo,jdbcType=VARCHAR},
       del_flag = #{delFlag,jdbcType=BIT},
@@ -192,7 +207,8 @@
       p_pro_pic_url = #{pProPicUrl,jdbcType=VARCHAR},
       p_price = #{pPrice,jdbcType=DECIMAL},
       p_taste_name = #{pTasteName,jdbcType=VARCHAR},
-      p_size_name = #{pSizeName,jdbcType=VARCHAR}
+      p_size_name = #{pSizeName,jdbcType=VARCHAR},
+      p_count = #{pCount,jdbcType=INTEGER},
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

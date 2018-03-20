@@ -57,17 +57,20 @@ public class COrderServiceImpl {
         if (StringUtil.isNotNull(cOrder) && StringUtil.isNotNull(cOrder.getOpenId()) && (cOrder.getDetailCount() > 0)) {
             String orderNo;
             //生成的code数据库中不重复
-            orderNo = UtilGenerateID.generateID("") + cOrder.getOpenId();
+            orderNo = UtilGenerateID.generateID("");
+//                    + cOrder.getOpenId();
             //插入订单明细
+            int orderCount = 0;
             for (COrderDetail c :cOrder.getcOrderDetails()) {
                 c.setOrderNo(orderNo);
                 cOrderDetailMapper.insertSelective(c);
+                orderCount += c.getpCount();
             }
             cOrder.setOrderNo(orderNo);
             cOrder.setCreateTime(new Date());
             cOrder.setHasPay(false);
             cOrder.setStatus(EnumOrderStatus.ToPay.getStatusCode());
-            cOrder.setDetailCount(cOrder.getcOrderDetails().size());
+            cOrder.setDetailCount(orderCount);
             int flag = cOrderMapper.insertSelective(cOrder);
             if (flag > 0) {
                 result.setCode(true);
