@@ -8,9 +8,11 @@ import com.mike.common.StringUtil;
 import com.mike.common.UtilGenerateID;
 import com.mike.resume.entity.COrder;
 import com.mike.resume.entity.COrderDetail;
+import com.mike.resume.entity.CProductSize;
 import com.mike.resume.enums.EnumOrderStatus;
 import com.mike.resume.mapper.COrderDetailMapper;
 import com.mike.resume.mapper.COrderMapper;
+import com.mike.resume.mapper.CProductSizeMapper;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +32,9 @@ public class COrderServiceImpl {
 
     @Autowired
     private COrderDetailMapper cOrderDetailMapper;
+
+    @Autowired
+    private CProductSizeMapper cProductSizeMapper;
 
     public ResponseResult<COrder> deleteByPrimaryKey(String orderNo) {
         logger.info("方法 deleteByPrimaryKey 开始");
@@ -54,32 +59,49 @@ public class COrderServiceImpl {
         logger.debug("方法 insertCOrder 开始,参数 cOrder:" + JSON.toJSONString(cOrder));
         ResponseResult<COrder> result = new ResponseResult<>();
 
-        if (StringUtil.isNotNull(cOrder) && StringUtil.isNotNull(cOrder.getOpenId()) && (cOrder.getDetailCount() > 0)) {
-            String orderNo;
-            //生成的code数据库中不重复
-            orderNo = UtilGenerateID.generateID("");
-//                    + cOrder.getOpenId();
-            //插入订单明细
-            int orderCount = 0;
-            for (COrderDetail c :cOrder.getcOrderDetails()) {
-                c.setOrderNo(orderNo);
-                cOrderDetailMapper.insertSelective(c);
-                orderCount += c.getpCount();
-            }
-            cOrder.setOrderNo(orderNo);
-            cOrder.setCreateTime(new Date());
-            cOrder.setHasPay(false);
-            cOrder.setStatus(EnumOrderStatus.ToPay.getStatusCode());
-            cOrder.setDetailCount(orderCount);
-            int flag = cOrderMapper.insertSelective(cOrder);
-            if (flag > 0) {
-                result.setCode(true);
-                result.setMsg("加入订单成功！");
-                result.setContent(cOrder);
-            } else {
+        if (StringUtil.isNotNull(cOrder) && StringUtil.isNotNull(cOrder.getOpenId()) && (cOrder.getDetailCount() > 0)&&StringUtil.isNotNull(cOrder.getcProductSizeId())) {
+            //查询产品规格库存
+            CProductSize cProductSize = cProductSizeMapper.selectByPrimaryKey(cOrder.getcProductSizeId());
+            if (StringUtil.isNotNull(cProductSize)){
+                if (cProductSize.getInventoryCount()>0){
+                    String orderNo;
+                    //生成的code数据库中不重复
+                    orderNo = UtilGenerateID.generateID("");
+                    //插入订单明细
+                    int orderCount = 0;
+                    for (COrderDetail c :cOrder.getcOrderDetails()) {
+                        c.setOrderNo(orderNo);
+                        cOrderDetailMapper.insertSelective(c);
+                        orderCount += c.getpCount();
+                    }
+                    cOrder.setOrderNo(orderNo);
+                    cOrder.setCreateTime(new Date());
+                    cOrder.setHasPay(false);
+                    cOrder.setStatus(EnumOrderStatus.ToPay.getStatusCode());
+                    cOrder.setDetailCount(orderCount);
+                    int flag = cOrderMapper.insertSelective(cOrder);
+                    if (flag > 0) {
+                        result.setCode(true);
+                        result.setMsg("加入订单成功！");
+                        result.setContent(cOrder);
+                    //订单添加成功，库存-1
+                        cProductSize.setInventoryCount(cProductSize.getInventoryCount()-1);
+                        cProductSizeMapper.updateByPrimaryKeySelective(cProductSize);
+                    } else {
+                        result.setCode(false);
+                        result.setMsg("加入订单失败！");
+                    }
+                }else {
+                    result.setCode(false);
+                    result.setMsg("订单添加失败，产品未查到库存！");
+                }
+            }else {
                 result.setCode(false);
-                result.setMsg("加入订单失败！");
+                result.setMsg("订单添加失败，产品未查到规格！");
             }
+
+
+
         } else {
             result.setCode(false);
             result.setMsg("数据有误，加入订单失败！");

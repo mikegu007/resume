@@ -65,7 +65,7 @@ public class COrderController {
         ResponseResult<COrder> result = new ResponseResult<>();
         if (StringUtil.isNotNull(json)) {
             COrder cOrder = JSON.parseObject(json,COrder.class);
-            if (StringUtil.isNotNull(cOrder)&&StringUtil.isNotNull(cOrder.getOpenId())&&StringUtil.isNotNull(cOrder.getcOrderDetails())){
+            if (StringUtil.isNotNull(cOrder)&&StringUtil.isNotNull(cOrder.getOpenId())&&StringUtil.isNotNull(cOrder.getcOrderDetails())&&StringUtil.isNotNull(cOrder.getcProductSizeId())){
                 cOrder.setDetailCount(cOrder.getcOrderDetails().size());
                 result = cOrderService.insertCOrder(cOrder);
             }else {

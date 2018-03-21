@@ -75,6 +75,11 @@ public class COrder implements Serializable {
      */
     private String sendPostcode;
 
+    /**
+     * 产品规格id
+     */
+    private Integer cProductSizeId;
+
     private List<COrderDetail> cOrderDetails;
 
     public String getOrderNo() {
@@ -236,5 +241,13 @@ public class COrder implements Serializable {
 
     public void setSendPostcode(String sendPostcode) {
         this.sendPostcode = sendPostcode;
+    }
+
+    public Integer getcProductSizeId() {
+        return cProductSizeId;
+    }
+
+    public void setcProductSizeId(Integer cProductSizeId) {
+        this.cProductSizeId = cProductSizeId;
     }
 }
