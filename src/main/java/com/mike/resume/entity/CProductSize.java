@@ -16,6 +16,10 @@ public class CProductSize implements Serializable {
      * 产品规格名
      */
     private String sizeName;
+    /**
+     * 库存
+     */
+    private Integer inventoryCount;
 
     public Integer getId() {
         return id;
@@ -39,5 +43,13 @@ public class CProductSize implements Serializable {
 
     public void setSizeName(String sizeName) {
         this.sizeName = sizeName == null ? null : sizeName.trim();
+    }
+
+    public Integer getInventoryCount() {
+        return inventoryCount;
+    }
+
+    public void setInventoryCount(Integer inventoryCount) {
+        this.inventoryCount = inventoryCount;
     }
 }

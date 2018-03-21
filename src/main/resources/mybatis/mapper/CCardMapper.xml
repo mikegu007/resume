@@ -12,10 +12,14 @@
     <result column="p_price" jdbcType="DECIMAL" property="pPrice" />
     <result column="p_taste_name" jdbcType="VARCHAR" property="pTasteName" />
     <result column="p_size_name" jdbcType="VARCHAR" property="pSizeName" />
+    <result column="c_product_size_id" jdbcType="INTEGER" property="cProductSizeId" />
+
+    <association property="cProductSize" column="c_product_size_id"
+                select="com.mike.resume.mapper.CProductSizeMapper.selectByPrimaryKey" />
   </resultMap>
   <sql id="Base_Column_List">
     id, open_id, del_flag, p_category_name, p_name, p_des, p_pro_pic_url, p_price, p_taste_name,
-    p_size_name
+    p_size_name,c_product_size_id
   </sql>
   <sql id="condition">
       <if test="id != null">
@@ -48,6 +52,9 @@
     <if test="pSizeName != null">
       and p_size_name = #{pSizeName,jdbcType=VARCHAR}
     </if>
+    <if test="cProductSizeId != null">
+      and c_product_size_id = #{cProductSizeId,jdbcType=INTEGER}
+    </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -66,15 +73,16 @@
     delete from c_card
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.mike.resume.entity.CCard" useGeneratedKeys="true" keyProperty="id">
     insert into c_card (id, open_id,
       del_flag, p_category_name, p_name, p_des,
     p_pro_pic_url, p_price, p_taste_name,
-    p_size_name)
+    p_size_name,c_product_size_id)
     values (#{id,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR},
       #{delFlag,jdbcType=BIT}, #{pCategoryName,jdbcType=VARCHAR}, #{pName,jdbcType=VARCHAR}, #{pDes,jdbcType=VARCHAR},
     #{pProPicUrl,jdbcType=VARCHAR}, #{pPrice,jdbcType=DECIMAL}, #{pTasteName,jdbcType=VARCHAR},
-    #{pSizeName,jdbcType=VARCHAR})
+    #{pSizeName,jdbcType=VARCHAR},#{cProductSizeId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.mike.resume.entity.CCard" useGeneratedKeys="true" keyProperty="id">
     insert into c_card
@@ -109,6 +117,9 @@
       <if test="pSizeName != null">
         p_size_name,
       </if>
+      <if test="cProductSizeId != null">
+        c_product_size_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -140,6 +151,9 @@
       </if>
       <if test="pSizeName != null">
         #{pSizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="cProductSizeId != null">
+        #{cProductSizeId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -173,6 +187,9 @@
       <if test="pSizeName != null">
         p_size_name = #{pSizeName,jdbcType=VARCHAR},
       </if>
+      <if test="cProductSizeId != null">
+        c_product_size_id = #{cProductSizeId,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -186,7 +203,8 @@
       p_pro_pic_url = #{pProPicUrl,jdbcType=VARCHAR},
       p_price = #{pPrice,jdbcType=DECIMAL},
       p_taste_name = #{pTasteName,jdbcType=VARCHAR},
-      p_size_name = #{pSizeName,jdbcType=VARCHAR}
+      p_size_name = #{pSizeName,jdbcType=VARCHAR},
+      c_product_size_id = #{cProductSizeId,jdbcType=INTEGER},
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -94,15 +94,22 @@ public class COrderServiceImpl {
         logger.debug("方法 updateCOrder 开始,参数 cOrder:" + JSON.toJSONString(cOrder));
         ResponseResult<COrder> result = new ResponseResult<>();
         if (StringUtil.isNotNull(cOrder) && StringUtil.isNotNull(cOrder.getOrderNo())) {
-            int flag = cOrderMapper.updateByPrimaryKeySelective(cOrder);
-            if (flag > 0) {
-                result.setCode(true);
-                result.setMsg("更新订单成功！");
-                result.setContent(cOrder);
-            } else {
+            List<COrder> cOrders = cOrderMapper.selectSelective(cOrder);
+            if (cOrders.size()>0){
                 result.setCode(false);
-                result.setMsg("更新订单失败！");
+                result.setMsg("请勿重复更新该订单！");
+            }else {
+                int flag = cOrderMapper.updateByPrimaryKeySelective(cOrder);
+                if (flag > 0) {
+                    result.setCode(true);
+                    result.setMsg("更新订单成功！");
+                    result.setContent(cOrder);
+                } else {
+                    result.setCode(false);
+                    result.setMsg("更新订单失败！");
+                }
             }
+
         } else {
             result.setCode(false);
             result.setMsg("数据有误，更新订单失败！");

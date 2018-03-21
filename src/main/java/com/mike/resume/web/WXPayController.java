@@ -10,6 +10,8 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,7 +39,13 @@ public class WXPayController {
 
     private static String url = "";
 
-
+    /**
+     * 新增预付账单
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/createUnifiedOrder", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
     public JSONObject createUnifiedOrder(HttpServletRequest request, HttpServletResponse response) {
         //设置最终返回对象
         JSONObject resultJson = new JSONObject();

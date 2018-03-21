@@ -1,26 +1,33 @@
 package com.mike.resume.web;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.mike.common.ResponseResult;
 import com.mike.common.UtilGenerateID;
+import com.mike.resume.entity.COrder;
 import com.mike.resume.entity.WXPaymentPo;
+import com.mike.resume.enums.EnumOrderStatus;
+import com.mike.resume.service.impl.COrderServiceImpl;
 import com.mike.resume.util.MessageUtil;
 import com.mike.resume.util.PayUtil;
+import com.mike.resume.util.weixinPay.Signature;
+import com.mike.resume.util.weixinPay.Util;
+import com.mike.resume.util.weixinPay.nativePay.NativeBackData;
+import com.mike.resume.util.weixinPay.nativePay.NativeBackReqData;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -30,6 +37,8 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class PayAction {
 
+    @Autowired
+    private COrderServiceImpl cOrderService;
 
 //    private String total_fee;//总金额
 //    private String body;//商品描述
@@ -129,5 +138,70 @@ public class PayAction {
 //            jsonArray.add(JsonObject);
         }
         return "pay";
+    }
+
+
+    /**
+     * 微信支付回调方法
+     * @param request
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping(value = "/wxPay/fromWeixin")
+    public void fromWeixin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        //接收微信回调
+        String notityXml = "", inputLine;
+        try {
+            while ((inputLine = request.getReader().readLine()) != null) {
+                notityXml += inputLine;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                request.getReader().close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("接收到的报文：" + notityXml);
+        //转换为对象
+        NativeBackData nativeBackData = (NativeBackData) Util.getObjectFromXML(notityXml, NativeBackData.class);
+        //检查签名
+        String sign = nativeBackData.getSign();
+        String calSign = Signature.getSign(nativeBackData.toMap());
+        nativeBackData.setSign(null);
+        String calSign2 = Signature.getSign(nativeBackData.toMap());
+        Util.log("返回的签名：" + sign);
+        Util.log("计算的签名：" + calSign);
+        Util.log("计算的签名2：" + calSign2);
+        //判断是否成功
+        NativeBackReqData nativeBackReqData = new NativeBackReqData();
+        if (nativeBackData.getReturn_code().equals("SUCCESS")) {
+            COrder cOrder = new COrder();
+            cOrder.setOrderNo(nativeBackData.getOut_trade_no());
+            cOrder.setStatus(EnumOrderStatus.ToSend.getStatusCode());
+            cOrderService.updateCOrder(cOrder);
+//                SimpleResult<Order> result = orderService.payment(nativeBackData.getOut_trade_no());
+//                try {
+                    //支付成功后 发送email
+//                    reportService.sendOrderConfirmEmail(result.getResultcontent().getSendEmail(), null, result.getResultcontent());
+                    //// TODO: 2016/11/28 游客模式下订单马上发送报告
+//                } catch (UnsupportedEncodingException e) {
+//                    e.printStackTrace();
+//                }
+
+                nativeBackReqData.setReturn_code("SUCCESS");
+
+        }else {
+            nativeBackReqData.setReturn_code("FAIL");
+            nativeBackReqData.setReturn_msg("支付失败");
+        }
+        //回复微信处理情况
+        BufferedOutputStream out = new BufferedOutputStream(
+                response.getOutputStream());
+        out.write(Util.getXMLStringFromObject(nativeBackReqData).getBytes());
+        out.flush();
+        out.close();
     }
 }
