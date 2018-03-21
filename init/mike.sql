@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2018-03-20 17:46:25
+Date: 2018-03-21 15:55:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,14 +30,15 @@ CREATE TABLE `c_card` (
   `p_price` decimal(40,0) DEFAULT NULL,
   `p_taste_name` varchar(255) DEFAULT NULL,
   `p_size_name` varchar(255) DEFAULT NULL,
+  `c_product_size_id` int(11) DEFAULT NULL COMMENT '产品规格id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_card
 -- ----------------------------
-INSERT INTO `c_card` VALUES ('33', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '芒果味', '小');
-INSERT INTO `c_card` VALUES ('34', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '榴莲味', '小');
+INSERT INTO `c_card` VALUES ('33', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '芒果味', '小', null);
+INSERT INTO `c_card` VALUES ('34', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '榴莲味', '小', null);
 
 -- ----------------------------
 -- Table structure for c_order
@@ -73,6 +74,8 @@ INSERT INTO `c_order` VALUES ('162423373E0', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '20
 INSERT INTO `c_order` VALUES ('1624236ACC7', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 15:01:42', null, '10', '10', '1', '1', '\0', '', '\0', '樊旭清', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '12楼', '18335831325', '285852555');
 INSERT INTO `c_order` VALUES ('16242378BDF', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 15:02:39', null, '60', '60', '1', '1', '\0', '', '\0', '樊樊樊樊', '上海市宝山区友谊路友谊路', '奥术大师大asfdasdsadsaddasd', '123213213', '2312321');
 INSERT INTO `c_order` VALUES ('162423B641F', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 15:06:51', null, '30', '30', '1', '1', '\0', '', '\0', '樊旭清', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '12楼', '18335831325', '285852555');
+INSERT INTO `c_order` VALUES ('1624323196B', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 19:19:56', null, '40', '40', '4', '1', '\0', '', '\0', '樊旭清', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '12楼', '18335831325', '285852555');
+INSERT INTO `c_order` VALUES ('1624324D775', 'on_Tx0N9Bv1hzktv4Lq3upm26Hfk', '2018-03-20 19:21:50', null, '60', '60', '2', '1', '\0', '', '\0', '饭了啊', '上海市宝山区逸仙路2816号华滋奔腾大厦B幢', '上安心', '45585855', '5858');
 
 -- ----------------------------
 -- Table structure for c_order_detail
@@ -91,7 +94,7 @@ CREATE TABLE `c_order_detail` (
   `p_size_name` varchar(255) DEFAULT NULL,
   `p_count` int(10) unsigned zerofill DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_order_detail
@@ -103,6 +106,9 @@ INSERT INTO `c_order_detail` VALUES ('26', '162423373E0', '\0', 'test分类', 't
 INSERT INTO `c_order_detail` VALUES ('27', '1624236ACC7', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '榴莲味', '小', null);
 INSERT INTO `c_order_detail` VALUES ('28', '16242378BDF', '\0', 'test分类2', 'test产品2', 'test产品描述2', null, '30', '少女味', '小', null);
 INSERT INTO `c_order_detail` VALUES ('29', '162423B641F', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '芒果味', '大', null);
+INSERT INTO `c_order_detail` VALUES ('30', '162431F94CF', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '芒果味', '小', null);
+INSERT INTO `c_order_detail` VALUES ('31', '1624323196B', '\0', 'test分类', 'test产品', 'test产品描述', null, '10', '榴莲味', '大', '0000000004');
+INSERT INTO `c_order_detail` VALUES ('32', '1624324D775', '\0', 'test分类2', 'test产品2', 'test产品描述2', null, '30', '草莓味', '小', '0000000002');
 
 -- ----------------------------
 -- Table structure for c_product
@@ -134,16 +140,17 @@ CREATE TABLE `c_product_size` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `c_product_id` int(11) DEFAULT NULL,
   `size_name` varchar(255) DEFAULT NULL,
+  `inventory_count` int(11) unsigned zerofill NOT NULL COMMENT '库存',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of c_product_size
 -- ----------------------------
-INSERT INTO `c_product_size` VALUES ('1', '1', '大');
-INSERT INTO `c_product_size` VALUES ('2', '1', '小');
-INSERT INTO `c_product_size` VALUES ('3', '2', '中');
-INSERT INTO `c_product_size` VALUES ('4', '2', '小');
+INSERT INTO `c_product_size` VALUES ('1', '1', '大', '00000000020');
+INSERT INTO `c_product_size` VALUES ('2', '1', '小', '00000000010');
+INSERT INTO `c_product_size` VALUES ('3', '2', '中', '00000000005');
+INSERT INTO `c_product_size` VALUES ('4', '2', '小', '00000000006');
 
 -- ----------------------------
 -- Table structure for c_product_taste
