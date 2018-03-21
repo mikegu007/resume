@@ -1,6 +1,7 @@
 package com.mike.resume.util.weixinPay;
 
-import com.IT3acredit.GlobalEagle.util.UtilPub;
+
+import com.mike.common.UtilPub;
 
 /**
  * User: rizenguo

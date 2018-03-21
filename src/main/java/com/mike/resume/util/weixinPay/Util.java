@@ -1,6 +1,5 @@
 package com.mike.resume.util.weixinPay;
 
-import com.IT3acredit.GlobalEagle.util.weixin.nativePay.NativeBackReqData;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;

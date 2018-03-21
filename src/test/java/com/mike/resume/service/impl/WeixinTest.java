@@ -1,19 +1,21 @@
-package com.mike.resume.util.weixinPay;
+package com.mike.resume.service.impl;
 
-import com.IT3acredit.GlobalEagle.util.weixin.nativePay.NativeReqData;
-import com.IT3acredit.GlobalEagle.util.weixin.nativePay.NativeResData;
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
+
+
+
+import com.mike.resume.util.weixinPay.Configure;
+import com.mike.resume.util.weixinPay.HttpsRequest;
+import com.mike.resume.util.weixinPay.Signature;
+import com.mike.resume.util.weixinPay.Util;
+import com.mike.resume.util.weixinPay.nativePay.NativeReqData;
+import com.mike.resume.util.weixinPay.nativePay.NativeResData;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 /**
  * Created by gavin on 16-12-15.

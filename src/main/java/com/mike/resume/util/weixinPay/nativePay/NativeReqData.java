@@ -1,7 +1,9 @@
 package com.mike.resume.util.weixinPay.nativePay;
 
-import com.IT3acredit.GlobalEagle.util.weixin.Configure;
-import com.IT3acredit.GlobalEagle.util.weixin.RandomStringGenerator;
+
+
+import com.mike.resume.util.weixinPay.Configure;
+import com.mike.resume.util.weixinPay.RandomStringGenerator;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
