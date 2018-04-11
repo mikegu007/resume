@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mike.OOFO.mapper.OUserConMapper">
+  <resultMap id="BaseResultMap" type="com.mike.OOFO.entity.OUserCon">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="del_flag" jdbcType="BIT" property="delFlag" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="wechat_code" jdbcType="VARCHAR" property="wechatCode" />
+    <result column="qq_code" jdbcType="VARCHAR" property="qqCode" />
+    <result column="weibo_code" jdbcType="VARCHAR" property="weiboCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, del_flag, user_id, phone, wechat_code, qq_code, weibo_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_user_con
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from o_user_con
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mike.OOFO.entity.OUserCon">
+    insert into o_user_con (id, create_time, del_flag, 
+      user_id, phone, wechat_code, 
+      qq_code, weibo_code)
+    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=BIT}, 
+      #{userId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{wechatCode,jdbcType=VARCHAR}, 
+      #{qqCode,jdbcType=VARCHAR}, #{weiboCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mike.OOFO.entity.OUserCon">
+    insert into o_user_con
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="wechatCode != null">
+        wechat_code,
+      </if>
+      <if test="qqCode != null">
+        qq_code,
+      </if>
+      <if test="weiboCode != null">
+        weibo_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=BIT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatCode != null">
+        #{wechatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="qqCode != null">
+        #{qqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboCode != null">
+        #{weiboCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mike.OOFO.entity.OUserCon">
+    update o_user_con
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=BIT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatCode != null">
+        wechat_code = #{wechatCode,jdbcType=VARCHAR},
+      </if>
+      <if test="qqCode != null">
+        qq_code = #{qqCode,jdbcType=VARCHAR},
+      </if>
+      <if test="weiboCode != null">
+        weibo_code = #{weiboCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mike.OOFO.entity.OUserCon">
+    update o_user_con
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=BIT},
+      user_id = #{userId,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      wechat_code = #{wechatCode,jdbcType=VARCHAR},
+      qq_code = #{qqCode,jdbcType=VARCHAR},
+      weibo_code = #{weiboCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

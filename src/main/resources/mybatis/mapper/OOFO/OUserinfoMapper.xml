@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mike.OOFO.mapper.OUserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.mike.OOFO.entity.OUserinfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="del_flag" jdbcType="BIT" property="delFlag" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="intention" jdbcType="VARCHAR" property="intention" />
+    <result column="birth" jdbcType="VARCHAR" property="birth" />
+    <result column="zodiac" jdbcType="VARCHAR" property="zodiac" />
+    <result column="constellation" jdbcType="VARCHAR" property="constellation" />
+    <result column="nationality" jdbcType="VARCHAR" property="nationality" />
+    <result column="height" jdbcType="VARCHAR" property="height" />
+    <result column="weight" jdbcType="VARCHAR" property="weight" />
+    <result column="marriage" jdbcType="VARCHAR" property="marriage" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="residence" jdbcType="VARCHAR" property="residence" />
+    <result column="register" jdbcType="VARCHAR" property="register" />
+    <result column="profession" jdbcType="VARCHAR" property="profession" />
+    <result column="family" jdbcType="VARCHAR" property="family" />
+    <result column="income" jdbcType="VARCHAR" property="income" />
+    <result column="interest" jdbcType="VARCHAR" property="interest" />
+    <result column="is_other_love" jdbcType="VARCHAR" property="isOtherLove" />
+    <result column="year_to_merry" jdbcType="VARCHAR" property="yearToMerry" />
+    <result column="have_kid" jdbcType="VARCHAR" property="haveKid" />
+    <result column="smail_require" jdbcType="VARCHAR" property="smailRequire" />
+    <result column="special_require" jdbcType="VARCHAR" property="specialRequire" />
+    <result column="about_us" jdbcType="VARCHAR" property="aboutUs" />
+    <result column="pic" jdbcType="VARCHAR" property="pic" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, create_time, del_flag, user_id, intention, birth, zodiac, constellation, nationality, 
+    height, weight, marriage, education, residence, register, profession, family, income, 
+    interest, is_other_love, year_to_merry, have_kid, smail_require, special_require, 
+    about_us, pic
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from o_userinfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from o_userinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mike.OOFO.entity.OUserinfo">
+    insert into o_userinfo (id, create_time, del_flag, 
+      user_id, intention, birth, 
+      zodiac, constellation, nationality, 
+      height, weight, marriage, 
+      education, residence, register, 
+      profession, family, income, 
+      interest, is_other_love, year_to_merry, 
+      have_kid, smail_require, special_require, 
+      about_us, pic)
+    values (#{id,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=BIT}, 
+      #{userId,jdbcType=INTEGER}, #{intention,jdbcType=VARCHAR}, #{birth,jdbcType=VARCHAR}, 
+      #{zodiac,jdbcType=VARCHAR}, #{constellation,jdbcType=VARCHAR}, #{nationality,jdbcType=VARCHAR}, 
+      #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, #{marriage,jdbcType=VARCHAR}, 
+      #{education,jdbcType=VARCHAR}, #{residence,jdbcType=VARCHAR}, #{register,jdbcType=VARCHAR}, 
+      #{profession,jdbcType=VARCHAR}, #{family,jdbcType=VARCHAR}, #{income,jdbcType=VARCHAR}, 
+      #{interest,jdbcType=VARCHAR}, #{isOtherLove,jdbcType=VARCHAR}, #{yearToMerry,jdbcType=VARCHAR}, 
+      #{haveKid,jdbcType=VARCHAR}, #{smailRequire,jdbcType=VARCHAR}, #{specialRequire,jdbcType=VARCHAR}, 
+      #{aboutUs,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mike.OOFO.entity.OUserinfo">
+    insert into o_userinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="intention != null">
+        intention,
+      </if>
+      <if test="birth != null">
+        birth,
+      </if>
+      <if test="zodiac != null">
+        zodiac,
+      </if>
+      <if test="constellation != null">
+        constellation,
+      </if>
+      <if test="nationality != null">
+        nationality,
+      </if>
+      <if test="height != null">
+        height,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="marriage != null">
+        marriage,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="residence != null">
+        residence,
+      </if>
+      <if test="register != null">
+        register,
+      </if>
+      <if test="profession != null">
+        profession,
+      </if>
+      <if test="family != null">
+        family,
+      </if>
+      <if test="income != null">
+        income,
+      </if>
+      <if test="interest != null">
+        interest,
+      </if>
+      <if test="isOtherLove != null">
+        is_other_love,
+      </if>
+      <if test="yearToMerry != null">
+        year_to_merry,
+      </if>
+      <if test="haveKid != null">
+        have_kid,
+      </if>
+      <if test="smailRequire != null">
+        smail_require,
+      </if>
+      <if test="specialRequire != null">
+        special_require,
+      </if>
+      <if test="aboutUs != null">
+        about_us,
+      </if>
+      <if test="pic != null">
+        pic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=BIT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="intention != null">
+        #{intention,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="zodiac != null">
+        #{zodiac,jdbcType=VARCHAR},
+      </if>
+      <if test="constellation != null">
+        #{constellation,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null">
+        #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null">
+        #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null">
+        #{register,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null">
+        #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="income != null">
+        #{income,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null">
+        #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="isOtherLove != null">
+        #{isOtherLove,jdbcType=VARCHAR},
+      </if>
+      <if test="yearToMerry != null">
+        #{yearToMerry,jdbcType=VARCHAR},
+      </if>
+      <if test="haveKid != null">
+        #{haveKid,jdbcType=VARCHAR},
+      </if>
+      <if test="smailRequire != null">
+        #{smailRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="specialRequire != null">
+        #{specialRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutUs != null">
+        #{aboutUs,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        #{pic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mike.OOFO.entity.OUserinfo">
+    update o_userinfo
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=BIT},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="intention != null">
+        intention = #{intention,jdbcType=VARCHAR},
+      </if>
+      <if test="birth != null">
+        birth = #{birth,jdbcType=VARCHAR},
+      </if>
+      <if test="zodiac != null">
+        zodiac = #{zodiac,jdbcType=VARCHAR},
+      </if>
+      <if test="constellation != null">
+        constellation = #{constellation,jdbcType=VARCHAR},
+      </if>
+      <if test="nationality != null">
+        nationality = #{nationality,jdbcType=VARCHAR},
+      </if>
+      <if test="height != null">
+        height = #{height,jdbcType=VARCHAR},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        marriage = #{marriage,jdbcType=VARCHAR},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=VARCHAR},
+      </if>
+      <if test="residence != null">
+        residence = #{residence,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null">
+        register = #{register,jdbcType=VARCHAR},
+      </if>
+      <if test="profession != null">
+        profession = #{profession,jdbcType=VARCHAR},
+      </if>
+      <if test="family != null">
+        family = #{family,jdbcType=VARCHAR},
+      </if>
+      <if test="income != null">
+        income = #{income,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null">
+        interest = #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="isOtherLove != null">
+        is_other_love = #{isOtherLove,jdbcType=VARCHAR},
+      </if>
+      <if test="yearToMerry != null">
+        year_to_merry = #{yearToMerry,jdbcType=VARCHAR},
+      </if>
+      <if test="haveKid != null">
+        have_kid = #{haveKid,jdbcType=VARCHAR},
+      </if>
+      <if test="smailRequire != null">
+        smail_require = #{smailRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="specialRequire != null">
+        special_require = #{specialRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="aboutUs != null">
+        about_us = #{aboutUs,jdbcType=VARCHAR},
+      </if>
+      <if test="pic != null">
+        pic = #{pic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mike.OOFO.entity.OUserinfo">
+    update o_userinfo
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=BIT},
+      user_id = #{userId,jdbcType=INTEGER},
+      intention = #{intention,jdbcType=VARCHAR},
+      birth = #{birth,jdbcType=VARCHAR},
+      zodiac = #{zodiac,jdbcType=VARCHAR},
+      constellation = #{constellation,jdbcType=VARCHAR},
+      nationality = #{nationality,jdbcType=VARCHAR},
+      height = #{height,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      marriage = #{marriage,jdbcType=VARCHAR},
+      education = #{education,jdbcType=VARCHAR},
+      residence = #{residence,jdbcType=VARCHAR},
+      register = #{register,jdbcType=VARCHAR},
+      profession = #{profession,jdbcType=VARCHAR},
+      family = #{family,jdbcType=VARCHAR},
+      income = #{income,jdbcType=VARCHAR},
+      interest = #{interest,jdbcType=VARCHAR},
+      is_other_love = #{isOtherLove,jdbcType=VARCHAR},
+      year_to_merry = #{yearToMerry,jdbcType=VARCHAR},
+      have_kid = #{haveKid,jdbcType=VARCHAR},
+      smail_require = #{smailRequire,jdbcType=VARCHAR},
+      special_require = #{specialRequire,jdbcType=VARCHAR},
+      about_us = #{aboutUs,jdbcType=VARCHAR},
+      pic = #{pic,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
