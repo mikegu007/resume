@@ -34,6 +34,10 @@ public class OUser implements Serializable{
 
     private Byte status;
 
+    private OUserCon oUserCon;
+
+    private OUserinfo oUserinfo;
+
     public Integer getId() {
         return id;
     }
@@ -152,5 +156,21 @@ public class OUser implements Serializable{
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public OUserCon getoUserCon() {
+        return oUserCon;
+    }
+
+    public void setoUserCon(OUserCon oUserCon) {
+        this.oUserCon = oUserCon;
+    }
+
+    public OUserinfo getoUserinfo() {
+        return oUserinfo;
+    }
+
+    public void setoUserinfo(OUserinfo oUserinfo) {
+        this.oUserinfo = oUserinfo;
     }
 }

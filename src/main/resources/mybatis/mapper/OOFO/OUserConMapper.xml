@@ -14,11 +14,43 @@
   <sql id="Base_Column_List">
     id, create_time, del_flag, user_id, phone, wechat_code, qq_code, weibo_code
   </sql>
+  <sql id="condition">
+    <if test="id != null">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="createTime != null">
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="delFlag != null">
+      and del_flag = #{delFlag,jdbcType=BIT}
+    </if>
+    <if test="userId != null">
+      and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="phone != null">
+      and phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="wechatCode != null">
+      and wechat_code = #{wechatCode,jdbcType=VARCHAR}
+    </if>
+    <if test="qqCode != null">
+      and qq_code = #{qqCode,jdbcType=VARCHAR}
+    </if>
+    <if test="weiboCode != null">
+      and  weibo_code = #{weiboCode,jdbcType=VARCHAR}
+    </if>
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from o_user_con
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from o_user_con
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from o_user_con
@@ -125,4 +157,11 @@
       weibo_code = #{weiboCode,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectSelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from o_user_con
+    where 1=1
+    <include refid="condition" />
+  </select>
 </mapper>

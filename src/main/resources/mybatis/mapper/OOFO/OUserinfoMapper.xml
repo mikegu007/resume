@@ -35,11 +35,97 @@
     interest, is_other_love, year_to_merry, have_kid, smail_require, special_require, 
     about_us, pic
   </sql>
+  <sql id="condition">
+    <if test="id != null">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="createTime != null">
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="delFlag != null">
+      and del_flag = #{delFlag,jdbcType=BIT}
+    </if>
+    <if test="userId != null">
+      and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+    <if test="intention != null">
+      and intention = #{intention,jdbcType=VARCHAR}
+    </if>
+    <if test="birth != null">
+      birth = #{birth,jdbcType=VARCHAR}
+    </if>
+    <if test="zodiac != null">
+      and zodiac = #{zodiac,jdbcType=VARCHAR}
+    </if>
+    <if test="constellation != null">
+      and constellation = #{constellation,jdbcType=VARCHAR}
+    </if>
+    <if test="nationality != null">
+      and nationality = #{nationality,jdbcType=VARCHAR}
+    </if>
+    <if test="height != null">
+      and  height = #{height,jdbcType=VARCHAR}
+    </if>
+    <if test="weight != null">
+      and weight = #{weight,jdbcType=VARCHAR}
+    </if>
+    <if test="marriage != null">
+      and marriage = #{marriage,jdbcType=VARCHAR}
+    </if>
+    <if test="education != null">
+      and education = #{education,jdbcType=VARCHAR}
+    </if>
+    <if test="residence != null">
+      and residence = #{residence,jdbcType=VARCHAR}
+    </if>
+    <if test="register != null">
+      and register = #{register,jdbcType=VARCHAR}
+    </if>
+    <if test="profession != null">
+      and profession = #{profession,jdbcType=VARCHAR}
+    </if>
+    <if test="family != null">
+      and family = #{family,jdbcType=VARCHAR}
+    </if>
+    <if test="income != null">
+      and income = #{income,jdbcType=VARCHAR}
+    </if>
+    <if test="interest != null">
+      and  interest = #{interest,jdbcType=VARCHAR}
+    </if>
+    <if test="isOtherLove != null">
+      and is_other_love = #{isOtherLove,jdbcType=VARCHAR}
+    </if>
+    <if test="yearToMerry != null">
+      and  year_to_merry = #{yearToMerry,jdbcType=VARCHAR}
+    </if>
+    <if test="haveKid != null">
+      and   have_kid = #{haveKid,jdbcType=VARCHAR}
+    </if>
+    <if test="smailRequire != null">
+      and  smail_require = #{smailRequire,jdbcType=VARCHAR}
+    </if>
+    <if test="specialRequire != null">
+      and  special_require = #{specialRequire,jdbcType=VARCHAR}
+    </if>
+    <if test="aboutUs != null">
+      and  about_us = #{aboutUs,jdbcType=VARCHAR}
+    </if>
+    <if test="pic != null">
+      and pic = #{pic,jdbcType=VARCHAR}
+    </if>
+  </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from o_userinfo
     where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from o_userinfo
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from o_userinfo
@@ -338,4 +424,11 @@
       pic = #{pic,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectSelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from o_userinfo
+    where 1=1
+    <include refid="condition" />
+  </select>
 </mapper>

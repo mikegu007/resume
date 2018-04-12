@@ -17,10 +17,63 @@
     <result column="profession" jdbcType="VARCHAR" property="profession" />
     <result column="company" jdbcType="VARCHAR" property="company" />
     <result column="status" jdbcType="TINYINT" property="status" />
+
+    <association property="oUserinfo" column="id"
+                 select="com.mike.OOFO.mapper.OUserinfoMapper.selectByUserId" />
+
+    <association property="oUserCon" column="id"
+                 select="com.mike.OOFO.mapper.OUserConMapper.selectByUserId" />
   </resultMap>
   <sql id="Base_Column_List">
     id, create_time, del_flag, open_id, name, sex, edu_code, idcard_code, idcard_fon, 
     idcard_bac, wechat_code, phone, profession, company, status
+  </sql>
+  <sql id="condition">
+    <if test="id != null">
+      and id = #{id,jdbcType=INTEGER}
+    </if>
+    <if test="createTime != null">
+      and create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="delFlag != null">
+      and del_flag = #{delFlag,jdbcType=BIT}
+    </if>
+    <if test="openId != null">
+      and open_id = #{openId,jdbcType=VARCHAR}
+    </if>
+    <if test="name != null">
+      and name = #{name,jdbcType=VARCHAR}
+    </if>
+    <if test="sex != null">
+      and sex = #{sex,jdbcType=TINYINT}
+    </if>
+    <if test="eduCode != null">
+      and edu_code = #{eduCode,jdbcType=VARCHAR}
+    </if>
+    <if test="idcardCode != null">
+      and idcard_code = #{idcardCode,jdbcType=VARCHAR}
+    </if>
+    <if test="idcardFon != null">
+      and idcard_fon = #{idcardFon,jdbcType=VARCHAR}
+    </if>
+    <if test="idcardBac != null">
+      and idcard_bac = #{idcardBac,jdbcType=VARCHAR}
+    </if>
+    <if test="wechatCode != null">
+      and wechat_code = #{wechatCode,jdbcType=VARCHAR}
+    </if>
+    <if test="phone != null">
+      and phone = #{phone,jdbcType=VARCHAR}
+    </if>
+    <if test="profession != null">
+      and profession = #{profession,jdbcType=VARCHAR}
+    </if>
+    <if test="company != null">
+      and company = #{company,jdbcType=VARCHAR}
+    </if>
+    <if test="status != null">
+      and status = #{status,jdbcType=TINYINT}
+    </if>
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -209,4 +262,11 @@
       status = #{status,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectSelective" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from o_user
+    where 1=1
+    <include refid="condition" />
+  </select>
 </mapper>

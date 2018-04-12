@@ -2,6 +2,8 @@ package com.mike.OOFO.mapper;
 
 import com.mike.OOFO.entity.OUser;
 
+import java.util.List;
+
 public interface OUserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,7 @@ public interface OUserMapper {
     int updateByPrimaryKeySelective(OUser record);
 
     int updateByPrimaryKey(OUser record);
+
+    List<OUser> selectSelective(OUser oUser);
+
 }
